@@ -10,6 +10,11 @@
         <item name="android:fontWeight">700</item>
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="MediumTextBoldStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontWeight">900</item>
+        <item name="android:textSize">15sp</item>
+    </style>
     <style name="SmallTextStyle">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>

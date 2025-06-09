@@ -3,4 +3,11 @@
     <string name="logo_name">CRISP</string>
     <string name="full_name">COMPREHENSIVE RUBBER INFORMATION\nSYSTEMS PLATFORM</string>
     <string name="org_name">Rubber Institute of India</string>
+    <string name="cont_1_title">Site Specific Recommendations</string>
+    <string name="cont_2_title">Advisory</string>
+    <string name="cont_3_title">FAQs</string>
+    <string name="cont_4_title">Rubber Board Facilities Nearby me</string>
+    <string name="cont_5_title">Rubber Market price per 100kg</string>
+    <string name="cont_6_title">Current Weather</string>
+    <string name="cont_7_title">5 Days Weather Forecast</string>
 </resources>
