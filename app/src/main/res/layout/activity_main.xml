@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_yellow"
@@ -75,6 +76,7 @@
                 android:layout_margin="@dimen/login_content_padding">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_layout_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Enter your Phone number"
@@ -89,6 +91,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/content_padding"
