@@ -15,9 +15,18 @@ import java.util.List;
 public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAdapter.ViewHolder> {
 
     private List<RecommendationItem> items;
+    private OnItemClickListener listener;
 
     public RecommendationAdapter(List<RecommendationItem> items) {
         this.items = items;
+    }
+
+    public interface OnItemClickListener{
+        void onRecommendationClick(RecommendationItem item);
+    }
+
+    public void setItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
     @NonNull
@@ -30,7 +39,7 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RecommendationItem item = items.get(position);
-        holder.bind(item);
+        holder.bind(item, listener);
     }
 
     @Override
@@ -50,10 +59,15 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
             tv_title = itemView.findViewById(R.id.tv_title);
         }
 
-        void bind(RecommendationItem item) {
+        void bind(RecommendationItem item, OnItemClickListener listener) {
             cv_item.setCardBackgroundColor(
                     androidx.core.content.ContextCompat.getColor(itemView.getContext(), item.bgColor)
             );
+            cv_item.setOnClickListener(v -> {
+                if (listener != null){
+                    listener.onRecommendationClick(item);
+                }
+            });
             iv_icon.setImageResource(item.icon);
             tv_title.setText(item.title);
         }

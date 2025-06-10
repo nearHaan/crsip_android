@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener {
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_nearby, rv_rubber_price;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
@@ -27,6 +27,11 @@ public class Home extends AppCompatActivity {
 
         initViews();
         setupRecyclerViews();
+    }
+
+    @Override
+    public void onRecommendationClick(RecommendationItem item) {
+        handleRecommendationClick(item);
     }
 
     void initViews(){
@@ -45,6 +50,7 @@ public class Home extends AppCompatActivity {
     private void setupRecyclerViews(){
         rv_recommendations.setLayoutManager(new GridLayoutManager(this, 3));
         recommendationAdapter = new RecommendationAdapter(getRecommedationItems());
+        recommendationAdapter.setItemClickListener(this);
         rv_recommendations.setAdapter(recommendationAdapter);
 
         rv_advisory.setLayoutManager(new GridLayoutManager(this, 4));
@@ -59,11 +65,11 @@ public class Home extends AppCompatActivity {
     private List<RecommendationItem> getRecommedationItems(){
         List<RecommendationItem> items = new ArrayList<>();
         items.add(new RecommendationItem(0, "Cloves", R.drawable.org_logo));
-        items.add(new RecommendationItem(1, "ABC", R.drawable.org_logo));
-        items.add(new RecommendationItem(2, "ABC", R.drawable.org_logo));
-        items.add(new RecommendationItem(3, "ABC", R.drawable.org_logo));
-        items.add(new RecommendationItem(4, "ABC", R.drawable.org_logo));
-        items.add(new RecommendationItem(5, "ABC", R.drawable.org_logo));
+        items.add(new RecommendationItem(1, "Planting Pits", R.drawable.org_logo));
+        items.add(new RecommendationItem(2, "Plant Spacing/Density", R.drawable.org_logo));
+        items.add(new RecommendationItem(3, "Intercrops", R.drawable.org_logo));
+        items.add(new RecommendationItem(4, "Rubsis", R.drawable.org_logo));
+        items.add(new RecommendationItem(5, "DFR/Soil and Leaf Sampling", R.drawable.org_logo));
         return items;
     }
 
@@ -87,6 +93,10 @@ public class Home extends AppCompatActivity {
         items.add(new FaqItem(2, "ABC", R.drawable.org_logo));
         items.add(new FaqItem(3, "ABC", R.drawable.org_logo));
         return items;
+    }
+
+    private void handleRecommendationClick(RecommendationItem item){
+        Log.d("CardClick", item.title);
     }
 }
 
