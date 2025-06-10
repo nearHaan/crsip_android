@@ -23,7 +23,7 @@ public class AdvisoryAdapter extends RecyclerView.Adapter<AdvisoryAdapter.ViewHo
     @NonNull
     @Override
     public AdvisoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
         return new ViewHolder(view);
     }
 

@@ -2,24 +2,29 @@ package com.duk.crsipandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener {
+public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener {
 
-    private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_nearby, rv_rubber_price;
+    private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
 
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
     private FaqAdapter faqAdapter;
+    private  FacilityAdapter facilityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +50,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         handleFaqClick(item);
     }
 
+    @Override
+    public void onFacilityClick(RubberFacility item) {
+        handleFacilityClick(item);
+    }
+
     void initViews(){
         rv_recommendations = findViewById(R.id.rv_recommendations);
         rv_advisory = findViewById(R.id.rv_advisory);
         rv_faqs = findViewById(R.id.rv_faqs);
-        rv_rubber_nearby = findViewById(R.id.rv_rubber_nearby);
+        rv_rubber_facility = findViewById(R.id.rv_rubber_facility);
         rv_rubber_price = findViewById(R.id.rv_rubber_price);
         tv_temp = findViewById(R.id.tv_temp);
         tv_prec = findViewById(R.id.tv_prec);
@@ -73,6 +83,11 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         faqAdapter = new FaqAdapter(getFaqItems());
         faqAdapter.setItemClickListener(this);
         rv_faqs.setAdapter(faqAdapter);
+
+        rv_rubber_facility.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        facilityAdapter = new FacilityAdapter(getFacility());
+        facilityAdapter.setItemClickListener(this);
+        rv_rubber_facility.setAdapter(facilityAdapter);
     }
 
     private List<RecommendationItem> getRecommedationItems(){
@@ -108,6 +123,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         return items;
     }
 
+    private List<RubberFacility> getFacility() {
+        List<RubberFacility> items = new ArrayList<>();
+        items.add(new RubberFacility(0, "Title1", "Subtitle"));
+        items.add(new RubberFacility(1, "Title2", "Subtitle"));
+        items.add(new RubberFacility(2, "Title3", "Subtitle"));
+        items.add(new RubberFacility(3, "Title4", "Subtitle"));
+        items.add(new RubberFacility(4, "Title5", "Subtitle"));
+        return items;
+    }
+
     private void handleRecommendationClick(RecommendationItem item){
         Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
     }
@@ -118,6 +143,15 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private void handleFaqClick(FaqItem item){
         Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleFacilityClick(RubberFacility item){
+        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
+        String location = "https://www.google.com/maps/search/?api=1&query=36.26577,-92.54324";
+        Uri gmmIntentUri = Uri.parse(location);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }
 
@@ -165,11 +199,11 @@ class FaqItem{
     }
 }
 
-class RubberNearbyItem{
+class RubberFacility{
     int id;
     public String title;
     public String subTitle;
-    public RubberNearbyItem(int id, String title, String subTitle){
+    public RubberFacility(int id, String title, String subTitle){
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;

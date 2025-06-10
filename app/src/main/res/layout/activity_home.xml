@@ -157,7 +157,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rubber_nearby"
+                android:id="@+id/rv_rubber_facility"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/content_padding"/>
