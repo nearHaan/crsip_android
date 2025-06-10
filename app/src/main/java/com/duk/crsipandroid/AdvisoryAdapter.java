@@ -15,6 +15,7 @@ import java.util.List;
 public class AdvisoryAdapter extends RecyclerView.Adapter<AdvisoryAdapter.ViewHolder> {
 
     private List<AdvisoryItem> items;
+    private onItemClickListener listener;
 
     public AdvisoryAdapter(List<AdvisoryItem> items){
         this.items = items;
@@ -26,10 +27,18 @@ public class AdvisoryAdapter extends RecyclerView.Adapter<AdvisoryAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    public interface onItemClickListener {
+        void onAdvisoryItemClick(AdvisoryItem item);
+    }
+
+    public void setItemClickListener(onItemClickListener listener){
+        this.listener = listener;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull AdvisoryAdapter.ViewHolder holder, int position) {
         AdvisoryItem item = items.get(position);
-        holder.bind(item);
+        holder.bind(item, listener);
     }
 
     @Override
@@ -49,12 +58,17 @@ public class AdvisoryAdapter extends RecyclerView.Adapter<AdvisoryAdapter.ViewHo
             tv_title = itemView.findViewById(R.id.tv_title);
         }
 
-        void bind(AdvisoryItem item) {
+        void bind(AdvisoryItem item, onItemClickListener listener) {
             iv_icon.setImageResource(item.icon);
             tv_title.setText(item.title);
             cv_item.setCardBackgroundColor(
                     androidx.core.content.ContextCompat.getColor(itemView.getContext(), item.bgColor)
             );
+            cv_item.setOnClickListener(v -> {
+                if (listener != null){
+                    listener.onAdvisoryItemClick(item);
+                }
+            });
         }
     }
 }

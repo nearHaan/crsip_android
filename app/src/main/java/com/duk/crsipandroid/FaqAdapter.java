@@ -14,7 +14,8 @@ import java.util.List;
 
 public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
 
-    public List<FaqItem> items;
+    private List<FaqItem> items;
+    private onItemClickListener listener;
 
     public FaqAdapter(List<FaqItem> items){
         this.items = items;
@@ -27,10 +28,18 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    public interface onItemClickListener{
+        void onFaqItemClick(FaqItem item);
+    }
+
+    public void setItemClickListener(onItemClickListener listener){
+        this.listener = listener;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FaqItem item = items.get(position);
-        holder.bind(item);
+        holder.bind(item, listener);
     }
 
     @Override
@@ -52,10 +61,15 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
             tv_title = itemView.findViewById(R.id.tv_title);
         }
 
-        void bind(FaqItem item) {
+        void bind(FaqItem item, onItemClickListener listener) {
             cv_item.setCardBackgroundColor(
                     androidx.core.content.ContextCompat.getColor(itemView.getContext(), item.bgColor)
             );
+            cv_item.setOnClickListener(v -> {
+                if (listener != null){
+                    listener.onFaqItemClick(item);
+                }
+            });
             iv_icon.setImageResource(item.icon);
             tv_title.setText(item.title);
         }

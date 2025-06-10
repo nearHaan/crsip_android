@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener {
+public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener {
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_nearby, rv_rubber_price;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
@@ -32,6 +33,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     @Override
     public void onRecommendationClick(RecommendationItem item) {
         handleRecommendationClick(item);
+    }
+
+    @Override
+    public void onAdvisoryItemClick(AdvisoryItem item) {
+        handleAdvisoryClick(item);
+    }
+
+    @Override
+    public void onFaqItemClick(FaqItem item) {
+        handleFaqClick(item);
     }
 
     void initViews(){
@@ -55,48 +66,58 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
         rv_advisory.setLayoutManager(new GridLayoutManager(this, 4));
         advisoryAdapter = new AdvisoryAdapter(getAdvisoryItems());
+        advisoryAdapter.setItemClickListener(this);
         rv_advisory.setAdapter(advisoryAdapter);
 
         rv_faqs.setLayoutManager(new GridLayoutManager(this, 4));
         faqAdapter = new FaqAdapter(getFaqItems());
+        faqAdapter.setItemClickListener(this);
         rv_faqs.setAdapter(faqAdapter);
     }
 
     private List<RecommendationItem> getRecommedationItems(){
         List<RecommendationItem> items = new ArrayList<>();
-        items.add(new RecommendationItem(0, "Cloves", R.drawable.org_logo));
+        items.add(new RecommendationItem(0, "Cloves", R.drawable.duk_logo));
         items.add(new RecommendationItem(1, "Planting Pits", R.drawable.org_logo));
-        items.add(new RecommendationItem(2, "Plant Spacing/Density", R.drawable.org_logo));
+        items.add(new RecommendationItem(2, "Plant Spacing/Density", R.drawable.duk_logo));
         items.add(new RecommendationItem(3, "Intercrops", R.drawable.org_logo));
-        items.add(new RecommendationItem(4, "Rubsis", R.drawable.org_logo));
+        items.add(new RecommendationItem(4, "Rubsis", R.drawable.duk_logo));
         items.add(new RecommendationItem(5, "DFR/Soil and Leaf Sampling", R.drawable.org_logo));
         return items;
     }
 
     private List<AdvisoryItem> getAdvisoryItems(){
         List<AdvisoryItem> items = new ArrayList<>();
-        items.add(new AdvisoryItem(0, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(1, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(2, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(3, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(4, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(5, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(6, "ABC", R.drawable.org_logo));
-        items.add(new AdvisoryItem(7, "ABC", R.drawable.org_logo));
+        items.add(new AdvisoryItem(0, "Latex Harvesting", R.drawable.duk_logo));
+        items.add(new AdvisoryItem(1, "Rubber Processing", R.drawable.org_logo));
+        items.add(new AdvisoryItem(2, "Disease and Pest Management", R.drawable.duk_logo));
+        items.add(new AdvisoryItem(3, "Disease Identification", R.drawable.org_logo));
+        items.add(new AdvisoryItem(4, "ABC", R.drawable.duk_logo));
+        items.add(new AdvisoryItem(5, "Flood Vulnerability", R.drawable.org_logo));
+        items.add(new AdvisoryItem(6, "Drought", R.drawable.duk_logo));
+        items.add(new AdvisoryItem(7, "DFR/Soil and Leaf Sampling", R.drawable.org_logo));
         return items;
     }
 
     private List<FaqItem> getFaqItems() {
         List<FaqItem> items = new ArrayList<>();
-        items.add(new FaqItem(0, "ABC", R.drawable.org_logo));
-        items.add(new FaqItem(1, "ABC", R.drawable.org_logo));
-        items.add(new FaqItem(2, "ABC", R.drawable.org_logo));
-        items.add(new FaqItem(3, "ABC", R.drawable.org_logo));
+        items.add(new FaqItem(0, "Crsip Management", R.drawable.org_logo));
+        items.add(new FaqItem(1, "Crop Protection", R.drawable.duk_logo));
+        items.add(new FaqItem(2, "Latex Harvesting", R.drawable.org_logo));
+        items.add(new FaqItem(3, "Planting Materials", R.drawable.duk_logo));
         return items;
     }
 
     private void handleRecommendationClick(RecommendationItem item){
-        Log.d("CardClick", item.title);
+        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleAdvisoryClick(AdvisoryItem item){
+        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleFaqClick(FaqItem item){
+        Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
     }
 }
 
