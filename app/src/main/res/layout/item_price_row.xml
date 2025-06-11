@@ -3,12 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:padding="2dp">
+    android:gravity="center">
 
     <TextView
         android:id="@+id/tv_price_row_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cont_1_title"
         style="@style/SmallTextStyle"
@@ -16,29 +15,31 @@
         android:layout_weight="4"/>
     <TextView
         android:id="@+id/tv_price_row_rup"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cont_1_title"
         style="@style/SmallTextStyle"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:layout_weight="1"/>
     <ImageView
         android:id="@+id/iv_price_row_rupRes"
-        android:layout_width="10dp"
+        android:layout_width="0dp"
         android:layout_height="10dp"
         android:src="@drawable/ic_home_24"
         android:layout_weight="1"/>
     <TextView
         android:id="@+id/tv_price_row_dol"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cont_1_title"
         style="@style/SmallTextStyle"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:layout_weight="1"/>
     <ImageView
         android:id="@+id/iv_price_row_dolRes"
-        android:layout_width="10dp"
+        android:layout_width="0dp"
         android:layout_height="10dp"
         android:src="@drawable/ic_home_24"
         android:layout_weight="1"/>

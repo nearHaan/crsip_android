@@ -31,12 +31,57 @@
                     android:text="Kottayam"
                     style="@style/MediumTextStyle"/>
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rubber_price"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="@dimen/content_padding"/>
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/card_content_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textAlignment="center"
+                    style="@style/SmallTextStyle"
+                    android:textColor="@color/blue"
+                    android:layout_weight="4"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="₹"
+                    android:textAlignment="center"
+                    style="@style/SmallTextStyle"
+                    android:layout_weight="1"
+                    android:textColor="@color/blue"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textAlignment="center"
+                    style="@style/SmallTextStyle"
+                    android:layout_weight="1"
+                    android:textColor="@color/blue"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/card_content_padding">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_rubber_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
