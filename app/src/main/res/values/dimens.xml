@@ -4,4 +4,6 @@
     <dimen name="card_content_padding">15dp</dimen>
     <dimen name="card_content_xPadding">25dp</dimen>
     <dimen name="content_padding">20dp</dimen>
+    <dimen name="mapbox_locationComponentTrackingMultiFingerMoveThreshold">50dp</dimen>
+    <dimen name="mapbox_locationComponentTrackingMultiFingerProtectionMoveThreshold">50dp</dimen>
 </resources>

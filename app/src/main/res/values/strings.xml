@@ -10,4 +10,6 @@
     <string name="cont_5_title">Rubber Market price per 100kg</string>
     <string name="cont_6_title">Current Weather</string>
     <string name="cont_7_title">5 Days Weather Forecast</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

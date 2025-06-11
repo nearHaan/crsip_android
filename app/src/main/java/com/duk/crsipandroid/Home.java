@@ -147,11 +147,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private void handleFacilityClick(RubberFacility item){
         Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
-        String location = "https://www.google.com/maps/search/?api=1&query=36.26577,-92.54324";
-        Uri gmmIntentUri = Uri.parse(location);
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
     }
 }
 
