@@ -63,7 +63,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/org_logo"
+                android:src="@drawable/ic_water_drop_24"
                 app:tint="@color/white" />
             <TextView
                 android:id="@+id/tv_prec_w"

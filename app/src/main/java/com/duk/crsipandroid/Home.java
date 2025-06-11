@@ -19,15 +19,20 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Time;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener {
 
-    private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price, rv_weather_forecast;
+    private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
 
     private MaterialButton btn_domestic, btn_international;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
@@ -37,8 +42,10 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private FaqAdapter faqAdapter;
     private  FacilityAdapter facilityAdapter;
     private WeatherAdapter weatherAdapter;
+    private PricePageAdapter pricePageAdapter;
 
     private boolean isDomestic = true;
+    private List<PricePageItem> domesticPages, internationalPages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         initViews();
         setButtons();
         setupRecyclerViews();
+        setupPages();
     }
 
     @Override
@@ -75,7 +83,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         rv_advisory = findViewById(R.id.rv_advisory);
         rv_faqs = findViewById(R.id.rv_faqs);
         rv_rubber_facility = findViewById(R.id.rv_rubber_facility);
-        rv_rubber_price = findViewById(R.id.rv_rubber_price);
+        rv_rubber_price_page = findViewById(R.id.rv_rubber_price_page);
         rv_weather_forecast = findViewById(R.id.rv_weather_forecast);
         tv_temp = findViewById(R.id.tv_temp);
         tv_prec = findViewById(R.id.tv_prec);
@@ -105,6 +113,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             btn_international.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         }
+        setupPages();
     }
 
 
@@ -132,6 +141,123 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         rv_weather_forecast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         weatherAdapter = new WeatherAdapter(getForeCastItems());
         rv_weather_forecast.setAdapter(weatherAdapter);
+    }
+
+    private void setupPages(){
+        try {
+            rv_rubber_price_page.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            pricePageAdapter = new PricePageAdapter(getPricePages(isDomestic?"domestic":"international"));
+            rv_rubber_price_page.setAdapter(pricePageAdapter);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String priceJSONlist = "{\n" +
+            "  \"domestic\": {\n" +
+            "    \"Kottayam\": [\n" +
+            "      {\n" +
+            "        \"title\": \"Title1\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"title\": \"Title2\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"title\": \"Title3\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      }\n" +
+            "    ],\n" +
+            "    \"Kollam\": [\n" +
+            "      {\n" +
+            "        \"title\": \"Title4\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"title\": \"Title5\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  },\n" +
+            "  \"international\": {\n" +
+            "    \"India\": [\n" +
+            "      {\n" +
+            "        \"title\": \"Title6\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      }\n" +
+            "    ],\n" +
+            "    \"USA\": [\n" +
+            "      {\n" +
+            "        \"title\": \"Title7\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"title\": \"Title8\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  }\n" +
+            "}";
+    private List<PricePageItem> getPricePages(String domain) throws JSONException{
+        List<PricePageItem> items = new ArrayList<>();
+        try {
+            JSONObject root = new JSONObject(priceJSONlist);
+            JSONObject domestic = root.getJSONObject(domain);
+
+            Iterator<String> keys = domestic.keys();
+
+            while (keys.hasNext()) {
+                String location = keys.next(); // e.g., "Kottayam"
+                JSONArray itemsArray = domestic.getJSONArray(location);
+
+                List<PricePageRowItem> rowItems = new ArrayList<>();
+
+                for (int i = 0; i < itemsArray.length(); i++) {
+                    JSONObject rowObj = itemsArray.getJSONObject(i);
+                    PricePageRowItem rowItem = new PricePageRowItem(
+                            rowObj.getString("title"),
+                            rowObj.getString("rupees"),
+                            rowObj.getString("rupStat"),
+                            rowObj.getString("dollars"),
+                            rowObj.getString("dolStat")
+                    );
+                    rowItems.add(rowItem);
+                }
+
+                PricePageItem pricePageItem = new PricePageItem(location, rowItems);
+                items.add(pricePageItem);
+            }
+            return items;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     private List<RecommendationItem> getRecommedationItems(){
@@ -299,5 +425,31 @@ class WeatherForeCast {
         this.weather = weather;
         this.temp = temp;
         this.precp = precp;
+    }
+}
+
+class PricePageItem{
+    public String title;
+    public List<PricePageRowItem> items;
+
+    public PricePageItem(String title, List<PricePageRowItem> items){
+        this.title = title;
+        this.items = items;
+    }
+}
+
+class PricePageRowItem{
+    public String title;
+    public String rup;
+    public int rupStat;
+    public String dol;
+    public  int dolStat;
+
+    public PricePageRowItem(String title, String rup, String rupStat, String dol, String dolStat){
+        this.title = title;
+        this.rup = rup;
+        this.rupStat = rupStat=="rise"?R.drawable.org_logo:(rupStat=="fall"?R.drawable.org_logo:R.drawable.org_logo);
+        this.dol = dol;
+        this.dolStat = dolStat=="rise"?R.drawable.org_logo:(dolStat=="fall"?R.drawable.org_logo:R.drawable.org_logo);
     }
 }
