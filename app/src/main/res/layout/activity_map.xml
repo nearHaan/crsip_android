@@ -8,14 +8,16 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/content_padding"
         app:cardCornerRadius="20dp">
+
         <fragment
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

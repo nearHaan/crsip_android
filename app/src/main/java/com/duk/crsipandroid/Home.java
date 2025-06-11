@@ -1,30 +1,44 @@
 package com.duk.crsipandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+
+import java.sql.Time;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener {
+public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener {
 
-    private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price;
+    private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price, rv_weather_forecast;
+
+    private MaterialButton btn_domestic, btn_international;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
 
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
     private FaqAdapter faqAdapter;
     private  FacilityAdapter facilityAdapter;
+    private WeatherAdapter weatherAdapter;
+
+    private boolean isDomestic = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +46,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setContentView(R.layout.activity_home);
 
         initViews();
+        setButtons();
         setupRecyclerViews();
     }
 
@@ -61,12 +76,37 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         rv_faqs = findViewById(R.id.rv_faqs);
         rv_rubber_facility = findViewById(R.id.rv_rubber_facility);
         rv_rubber_price = findViewById(R.id.rv_rubber_price);
+        rv_weather_forecast = findViewById(R.id.rv_weather_forecast);
         tv_temp = findViewById(R.id.tv_temp);
         tv_prec = findViewById(R.id.tv_prec);
         tv_wind_speed = findViewById(R.id.tv_wind_speed);
         tv_feels_like = findViewById(R.id.tv_feels_like);
         tv_weather = findViewById(R.id.tv_weather);
+        btn_domestic = findViewById(R.id.btn_domestic);
+        btn_international = findViewById(R.id.btn_international);
+        btn_domestic.setOnClickListener(this);
+        btn_international.setOnClickListener(this);
     }
+
+    void setButtons() {
+        if (isDomestic) {
+            btn_domestic.setBackgroundTintList(ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.blue)));
+            btn_international.setBackgroundTintList(ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.white)));
+            btn_domestic.setTextColor(ContextCompat.getColor(this, R.color.white));
+            btn_international.setTextColor(ContextCompat.getColor(this, R.color.blue));
+        } else {
+            btn_domestic.setBackgroundTintList(ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.white)));
+            btn_international.setBackgroundTintList(ColorStateList.valueOf(
+                    ContextCompat.getColor(this, R.color.blue)));
+            btn_domestic.setTextColor(ContextCompat.getColor(this, R.color.blue));
+            btn_international.setTextColor(ContextCompat.getColor(this, R.color.white));
+
+        }
+    }
+
 
     private void setupRecyclerViews(){
         rv_recommendations.setLayoutManager(new GridLayoutManager(this, 3));
@@ -88,6 +128,10 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         facilityAdapter = new FacilityAdapter(getFacility());
         facilityAdapter.setItemClickListener(this);
         rv_rubber_facility.setAdapter(facilityAdapter);
+
+        rv_weather_forecast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        weatherAdapter = new WeatherAdapter(getForeCastItems());
+        rv_weather_forecast.setAdapter(weatherAdapter);
     }
 
     private List<RecommendationItem> getRecommedationItems(){
@@ -125,11 +169,22 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private List<RubberFacility> getFacility() {
         List<RubberFacility> items = new ArrayList<>();
-        items.add(new RubberFacility(0, "Title1", "Subtitle"));
-        items.add(new RubberFacility(1, "Title2", "Subtitle"));
-        items.add(new RubberFacility(2, "Title3", "Subtitle"));
-        items.add(new RubberFacility(3, "Title4", "Subtitle"));
-        items.add(new RubberFacility(4, "Title5", "Subtitle"));
+        items.add(new RubberFacility(0, "Kollam", "Subtitle", 8.886900, 76.590469));
+        items.add(new RubberFacility(1, "Trivandrum", "Subtitle", 8.530240, 76.929100));
+        items.add(new RubberFacility(2, "Title3", "Subtitle", 8.5241, 76.9366));
+        items.add(new RubberFacility(3, "Title4", "Subtitle", 8.5241, 76.9366));
+        items.add(new RubberFacility(4, "Title5", "Subtitle", 8.5241, 76.9366));
+        return items;
+    }
+
+    private List<WeatherForeCast> getForeCastItems() {
+        List<WeatherForeCast> items = new ArrayList<>();
+        items.add(new WeatherForeCast("11-06-2025", "Wednesday", "11:00am", R.drawable.duk_logo, "Light Rain", "29°C", "73%"));
+        items.add(new WeatherForeCast("11-06-2025", "Wednesday", "11:00am", R.drawable.duk_logo, "Light Rain", "29°C", "73%"));
+        items.add(new WeatherForeCast("11-06-2025", "Wednesday", "11:00am", R.drawable.duk_logo, "Light Rain", "29°C", "73%"));
+        items.add(new WeatherForeCast("11-06-2025", "Wednesday", "11:00am", R.drawable.duk_logo, "Light Rain", "29°C", "73%"));
+        items.add(new WeatherForeCast("11-06-2025", "Wednesday", "11:00am", R.drawable.duk_logo, "Light Rain", "29°C", "73%"));
+        items.add(new WeatherForeCast("11-06-2025", "Wednesday", "11:00am", R.drawable.duk_logo, "Light Rain", "29°C", "73%"));
         return items;
     }
 
@@ -147,8 +202,24 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private void handleFacilityClick(RubberFacility item){
         Toast.makeText(this, item.title, Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(this, MapActivity.class);
+
+        intent.putExtra(MapActivity.EXTRA_LATITUDE, item.lat);
+        intent.putExtra(MapActivity.EXTRA_LONGITUDE, item.lon);
+        intent.putExtra(MapActivity.EXTRA_TITLE, item.title);
+
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.btn_domestic){
+            isDomestic = true;
+        } else if (v.getId() == R.id.btn_international){
+            isDomestic = false;
+        }
+        setButtons();
     }
 }
 
@@ -200,9 +271,33 @@ class RubberFacility{
     int id;
     public String title;
     public String subTitle;
-    public RubberFacility(int id, String title, String subTitle){
+    public double lat;
+    public double lon;
+    public RubberFacility(int id, String title, String subTitle, double lat, double lon){
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
+        this.lat = lat;
+        this.lon = lon;
+    }
+}
+
+class WeatherForeCast {
+    public String date;
+    public String day;
+    public String time;
+    public int weatherRes;
+    public String weather;
+    public String temp;
+    public String precp;
+
+    public WeatherForeCast(String date, String day, String time, int weatherRes, String weather, String temp, String precp){
+        this.date = date;
+        this.day = day;
+        this.time = time;
+        this.weatherRes = weatherRes;
+        this.weather = weather;
+        this.temp = temp;
+        this.precp = precp;
     }
 }

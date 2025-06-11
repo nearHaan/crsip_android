@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/white">
-    
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -183,11 +182,69 @@
                     android:textColor="@color/black"/>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rubber_price"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/content_padding"/>
+                android:paddingVertical="@dimen/card_content_padding">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_domestic"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Domestic"
+                    android:layout_marginLeft="@dimen/content_padding"
+                    android:paddingVertical="@dimen/card_content_padding"
+                    style="@style/Widget.Material3.Button.OutlinedButton"/>
+                <LinearLayout
+                    android:layout_width="@dimen/content_padding"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_international"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="International"
+                    android:layout_marginRight="@dimen/content_padding"
+                    android:paddingVertical="@dimen/card_content_padding"
+                    style="@style/Widget.Material3.Button.OutlinedButton"/>
+            </LinearLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToOutline="true"
+                android:layout_marginHorizontal="@dimen/content_padding"
+                android:layout_marginBottom="@dimen/content_padding"
+                app:cardCornerRadius="20dp"
+                android:minHeight="200dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="@dimen/card_content_padding"
+                        android:gravity="center"
+                        android:background="@color/blue">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kottayam"
+                            style="@style/MediumTextStyle"/>
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_rubber_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/content_padding"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
         <!-- Current Weather -->

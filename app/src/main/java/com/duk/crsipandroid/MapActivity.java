@@ -1,43 +1,56 @@
 package com.duk.crsipandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-// Implement OnMapReadyCallback.
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private double lat, lon;
+    private double lat = 0.0;
+    private double lon = 0.0;
 
-    public MapActivity(double lat, double lon){
-        this.lat = lat;
-        this.lon = lon;
-    }
+    public static final String EXTRA_LATITUDE = "extra_latitude";
+    public static final String EXTRA_LONGITUDE = "extra_longitude";
+    public static final String EXTRA_TITLE = "extra_title";
+
+    private String markerTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set the layout file as the content view.
         setContentView(R.layout.activity_map);
 
-        // Get a handle to the fragment and register the callback.
+        // Get coordinates from intent extras
+        if (getIntent().getExtras() != null) {
+            lat = getIntent().getDoubleExtra(EXTRA_LATITUDE, lat);
+            lon = getIntent().getDoubleExtra(EXTRA_LONGITUDE, lon);
+            markerTitle = getIntent().getStringExtra(EXTRA_TITLE);
+            if (markerTitle == null) markerTitle = "Location";
+        }
+
+        // Get a handle to the fragment and register the callback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
     }
 
-    // Get a handle to the GoogleMap object and display marker.
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d("Map", "Ready");
+        LatLng location = new LatLng(lat, lon);
         googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(0, 0))
-                .title("Marker"));
+                .position(location)
+                .title(markerTitle));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 20f));
     }
 }
