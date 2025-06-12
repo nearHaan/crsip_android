@@ -38,7 +38,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
     private MaterialButton btn_domestic, btn_international;
-    private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_username;
+    private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_username, tv_version_no;
     private RelativeLayout notificationContainer;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
@@ -110,6 +110,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         btn_international.setOnClickListener(this);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        tv_version_no = findViewById(R.id.tv_version_no);
     }
 
     void setButtons() {
@@ -137,7 +138,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -151,6 +152,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         navigationView.setNavigationItemSelectedListener(this);
         toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
         toggle.syncState();
+        tv_version_no.setText("Version 1.0.0");
     }
 
     private void setupNavigationHeader() {
