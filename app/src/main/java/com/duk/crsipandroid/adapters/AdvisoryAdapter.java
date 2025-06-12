@@ -1,4 +1,4 @@
-package com.duk.crsipandroid;
+package com.duk.crsipandroid.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,37 +10,37 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.duk.crsipandroid.mvp.RecommendationItem;
+import com.duk.crsipandroid.R;
+import com.duk.crsipandroid.mvp.AdvisoryItem;
 
 import java.util.List;
 
-public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAdapter.ViewHolder> {
+public class AdvisoryAdapter extends RecyclerView.Adapter<AdvisoryAdapter.ViewHolder> {
 
-    private List<RecommendationItem> items;
-    private OnItemClickListener listener;
+    private List<AdvisoryItem> items;
+    private onItemClickListener listener;
 
-    public RecommendationAdapter(List<RecommendationItem> items) {
+    public AdvisoryAdapter(List<AdvisoryItem> items){
         this.items = items;
     }
-
-    public interface OnItemClickListener{
-        void onRecommendationClick(RecommendationItem item);
-    }
-
-    public void setItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
-    }
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdvisoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false);
         return new ViewHolder(view);
     }
 
+    public interface onItemClickListener {
+        void onAdvisoryItemClick(AdvisoryItem item);
+    }
+
+    public void setItemClickListener(onItemClickListener listener){
+        this.listener = listener;
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RecommendationItem item = items.get(position);
+    public void onBindViewHolder(@NonNull AdvisoryAdapter.ViewHolder holder, int position) {
+        AdvisoryItem item = items.get(position);
         holder.bind(item, listener);
     }
 
@@ -61,17 +61,17 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
             tv_title = itemView.findViewById(R.id.tv_title);
         }
 
-        void bind(RecommendationItem item, OnItemClickListener listener) {
+        void bind(AdvisoryItem item, onItemClickListener listener) {
+            iv_icon.setImageResource(item.icon);
+            tv_title.setText(item.title);
             cv_item.setCardBackgroundColor(
                     androidx.core.content.ContextCompat.getColor(itemView.getContext(), item.bgColor)
             );
             cv_item.setOnClickListener(v -> {
                 if (listener != null){
-                    listener.onRecommendationClick(item);
+                    listener.onAdvisoryItemClick(item);
                 }
             });
-            iv_icon.setImageResource(item.icon);
-            tv_title.setText(item.title);
         }
     }
 }

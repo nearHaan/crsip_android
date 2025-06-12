@@ -1,7 +1,6 @@
-package com.duk.crsipandroid;
+package com.duk.crsipandroid.adapters;
 
 import android.content.res.ColorStateList;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.mvp.PricePageRowItem;
 
 import java.util.List;

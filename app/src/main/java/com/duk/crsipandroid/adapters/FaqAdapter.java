@@ -1,4 +1,4 @@
-package com.duk.crsipandroid;
+package com.duk.crsipandroid.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.mvp.FaqItem;
 
 import java.util.List;

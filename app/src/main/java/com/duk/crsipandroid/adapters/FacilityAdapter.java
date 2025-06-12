@@ -1,20 +1,17 @@
-package com.duk.crsipandroid;
+package com.duk.crsipandroid.adapters;
 
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.mvp.RubberFacility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FacilityAdapter extends RecyclerView.Adapter<FacilityAdapter.ViewHolder> {

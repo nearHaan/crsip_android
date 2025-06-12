@@ -21,6 +21,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duk.crsipandroid.adapters.AdvisoryAdapter;
+import com.duk.crsipandroid.adapters.FacilityAdapter;
+import com.duk.crsipandroid.adapters.FaqAdapter;
+import com.duk.crsipandroid.adapters.PricePageAdapter;
+import com.duk.crsipandroid.adapters.RecommendationAdapter;
+import com.duk.crsipandroid.adapters.WeatherAdapter;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
 import com.duk.crsipandroid.mvp.PricePageItem;
