@@ -1,4 +1,4 @@
-package com.duk.crsipandroid;
+package com.duk.crsipandroid.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.adapters.AdvisoryAdapter;
 import com.duk.crsipandroid.adapters.FacilityAdapter;
 import com.duk.crsipandroid.adapters.FaqAdapter;

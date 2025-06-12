@@ -1,14 +1,13 @@
-package com.duk.crsipandroid;
+package com.duk.crsipandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.duk.crsipandroid.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.button.MaterialButton;
