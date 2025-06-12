@@ -38,7 +38,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
     private MaterialButton btn_domestic, btn_international;
-    private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_userNameText;
+    private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_username;
     private RelativeLayout notificationContainer;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
@@ -154,9 +154,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     }
 
     private void setupNavigationHeader() {
-//        View headerView = navigationView.getHeaderView(0);
-//        tv_userNameText = headerView.findViewById(R.id.tv_prec);
-//        tv_userNameText.setText("Farhaan");
+        View headerView = navigationView.getHeaderView(0);
+        tv_username = headerView.findViewById(R.id.tv_username);
+        tv_username.setText("Farhaan");
     }
 
 

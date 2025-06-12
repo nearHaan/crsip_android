@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_opt1"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_myplantation"
         android:title="@string/nav_opt1"/>
     <item
         android:id="@+id/nav_opt2"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_edit"
         android:title="@string/nav_opt2"/>
     <item
         android:id="@+id/nav_opt3"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_language"
         android:title="@string/nav_opt3"/>
     <item
         android:id="@+id/nav_opt4"
-        android:icon="@drawable/ic_menu"
+        android:icon="@drawable/ic_logout"
         android:title="@string/nav_opt4"/>
 </menu>
