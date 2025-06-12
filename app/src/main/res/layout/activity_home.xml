@@ -242,10 +242,10 @@
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_location_price"
+                        android:id="@+id/btn_location_facility"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Location"
+                        android:text="Current Location"
                         app:icon="@drawable/ic_location"
                         app:iconTint="@color/black"
                         app:iconPadding="@dimen/card_content_padding"
@@ -342,7 +342,7 @@
                         android:id="@+id/btn_location_weather"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Location"
+                        android:text="Current Location"
                         app:icon="@drawable/ic_location"
                         app:iconTint="@color/black"
                         app:iconPadding="@dimen/card_content_padding"

@@ -35,6 +35,7 @@ import com.duk.crsipandroid.mvp.PricePageRowItem;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
+import com.duk.crsipandroid.utils.BottomSheetLocation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
@@ -44,19 +45,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, BottomSheetLocation.onItemClickListener {
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
-    private MaterialButton btn_domestic, btn_international;
+    private MaterialButton btn_domestic, btn_international, btn_location_facility, btn_location_weather;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_username, tv_version_no;
     private RelativeLayout notificationContainer;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
+    private BottomSheetLocation bottomSheetLocation;
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
     private FaqAdapter faqAdapter;
@@ -65,8 +68,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private PricePageAdapter pricePageAdapter;
 
     private boolean isDomestic = true;
+    private boolean isFacilitySelection = true;
     private List<PricePageItem> domesticPages, internationalPages;
-
+    private List<String> locationsList;
     private SnapHelper snapHelper;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -80,6 +84,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setupDrawer();
         setupNavigationHeader();
         setButtons();
+        setupBS();
         setupRecyclerViews();
         setupPages();
     }
@@ -124,6 +129,10 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         tv_version_no = findViewById(R.id.tv_version_no);
+        btn_location_facility = findViewById(R.id.btn_location_facility);
+        btn_location_weather = findViewById(R.id.btn_location_weather);
+        btn_location_facility.setOnClickListener(this);
+        btn_location_weather.setOnClickListener(this);
     }
 
     void setButtons() {
@@ -216,6 +225,13 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void setupBS(){
+        locationsList = new ArrayList<>();
+        locationsList = Arrays.asList(new String[]{"Kollam", "Trivandrum", "Ernakulam", "Alappuzha", "Idukki", "Palakkad"});
+        bottomSheetLocation = new BottomSheetLocation(locationsList);
+        bottomSheetLocation.setItemClickListener(this);
     }
 
     private String priceJSONlist = "{\n" +
@@ -436,6 +452,12 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             setButtons();
         } else if (v.getId() == R.id.notification_container) {
             Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.btn_location_facility) {
+            isFacilitySelection = true;
+            bottomSheetLocation.show(getSupportFragmentManager(), "Location Bottom Sheet");
+        } else if (v.getId() == R.id.btn_location_weather) {
+            isFacilitySelection = false;
+            bottomSheetLocation.show(getSupportFragmentManager(), "Location Bottom Sheet");
         }
     }
 
@@ -472,5 +494,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
+    @Override
+    public void onSheetItemClick(String title, int position) {
+        if (isFacilitySelection){
+            Toast.makeText(this, title+" facility",Toast.LENGTH_SHORT).show();
+            btn_location_facility.setText(title);
+        } else {
+            Toast.makeText(this, title+" weather",Toast.LENGTH_SHORT).show();
+            btn_location_weather.setText(title);
+        }
+        bottomSheetLocation.dismiss();
+    }
 }
 
