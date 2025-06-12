@@ -1,359 +1,438 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:background="@color/white">
+    android:layout_width="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb_home"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/app_yellow"
+            app:contentInsetStart="0dp"
+            android:gravity="center">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_menu"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:clickable="true"
+                    android:layout_marginStart="@dimen/card_content_padding"
+                    app:tint="@color/white"/>
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="CRISP"
+                    style="@style/AppTitleStyle" />
+
+                <RelativeLayout
+                    android:id="@+id/notification_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/card_content_padding"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="10dp"
+                    android:clipToPadding="false">
+
+                    <ImageView
+                        android:id="@+id/notification_icon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_notifications"
+                        app:tint="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/notification_badge"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignTop="@id/notification_icon"
+                        android:layout_alignEnd="@id/notification_icon"
+                        android:layout_marginTop="-2dp"
+                        android:layout_marginEnd="-2dp"
+                        android:background="@drawable/shape_notification_badge"
+                        android:gravity="center"
+                        android:text="1"
+                        style="@style/SmallTextStyle"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Top Box -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="@dimen/content_padding">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="@string/logo_name"
-                android:src="@drawable/org_logo"
-                app:tint="@color/app_green" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/logo_name"
-                style="@style/LogoTextStyle"
-                android:textColor="@color/app_green"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/full_name"
-                android:textAlignment="center"
-                style="@style/MediumTextStyle"
-                android:textColor="@color/app_green"/>
-        </LinearLayout>
-
-        <!-- Site Specific Recommendations -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="@dimen/content_padding"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/app_grey"
-            android:layout_marginBottom="@dimen/content_padding">
-
+            <!-- Top Box -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/card_content_padding">
+                android:gravity="center"
+                android:padding="@dimen/content_padding">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cont_1_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_recommendations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/card_content_padding"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Advisory -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="@dimen/content_padding"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/app_grey"
-            android:layout_marginBottom="@dimen/content_padding">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_content_padding">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cont_2_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_advisory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/card_content_padding"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- FAQs -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="@dimen/content_padding"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/app_grey"
-            android:layout_marginBottom="@dimen/content_padding">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/card_content_padding">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cont_3_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_faqs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/card_content_padding"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Rubber Board Facilities Near me -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/card_content_padding"
-                android:background="@color/app_grey">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/logo_name"
+                    android:src="@drawable/org_logo"
+                    app:tint="@color/app_green" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cont_4_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rubber_facility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/content_padding"/>
-        </LinearLayout>
-
-        <!-- Rubber Market Price per 100kg -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/card_content_padding"
-                android:background="@color/app_grey">
+                    android:text="@string/logo_name"
+                    style="@style/LogoTextStyle"
+                    android:textColor="@color/app_green"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cont_5_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
+                    android:text="@string/full_name"
+                    android:textAlignment="center"
+                    style="@style/MediumTextStyle"
+                    android:textColor="@color/app_green"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/card_content_padding">
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_domestic"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Domestic"
-                    android:layout_marginLeft="@dimen/content_padding"
-                    android:paddingVertical="@dimen/card_content_padding"
-                    style="@style/Widget.Material3.Button.OutlinedButton"/>
-                <LinearLayout
-                    android:layout_width="@dimen/content_padding"
-                    android:layout_height="wrap_content"/>
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_international"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="International"
-                    android:layout_marginRight="@dimen/content_padding"
-                    android:paddingVertical="@dimen/card_content_padding"
-                    style="@style/Widget.Material3.Button.OutlinedButton"/>
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_rubber_price_page"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <!-- Current Weather -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/card_content_padding"
-                android:background="@color/app_grey">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cont_6_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-
+            <!-- Site Specific Recommendations -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="30dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/blue"
-                app:contentPaddingLeft="@dimen/card_content_padding"
-                app:contentPaddingRight="@dimen/card_content_padding"
-                app:contentPaddingTop="@dimen/card_content_xPadding"
-                app:contentPaddingBottom="@dimen/card_content_xPadding"
-                android:layout_margin="@dimen/content_padding">
+                android:orientation="vertical"
+                android:layout_marginHorizontal="@dimen/content_padding"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/app_grey"
+                android:layout_marginBottom="@dimen/content_padding">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_content_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_1_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_recommendations"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_content_padding"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Advisory -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="@dimen/content_padding"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/app_grey"
+                android:layout_marginBottom="@dimen/content_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_content_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_2_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_advisory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_content_padding"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- FAQs -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="@dimen/content_padding"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/app_grey"
+                android:layout_marginBottom="@dimen/content_padding">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_content_padding">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_3_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_faqs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/card_content_padding"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Rubber Board Facilities Near me -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/card_content_padding"
+                    android:background="@color/app_grey">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_4_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_rubber_facility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/content_padding"/>
+            </LinearLayout>
+
+            <!-- Rubber Market Price per 100kg -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/card_content_padding"
+                    android:background="@color/app_grey">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_5_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/card_content_padding">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_domestic"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Domestic"
+                        android:layout_marginLeft="@dimen/content_padding"
+                        android:paddingVertical="@dimen/card_content_padding"
+                        style="@style/Widget.Material3.Button.OutlinedButton"/>
+                    <LinearLayout
+                        android:layout_width="@dimen/content_padding"
+                        android:layout_height="wrap_content"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_international"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="International"
+                        android:layout_marginRight="@dimen/content_padding"
+                        android:paddingVertical="@dimen/card_content_padding"
+                        style="@style/Widget.Material3.Button.OutlinedButton"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_rubber_price_page"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+            <!-- Current Weather -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/card_content_padding"
+                    android:background="@color/app_grey">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_6_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/blue"
+                    app:contentPaddingLeft="@dimen/card_content_padding"
+                    app:contentPaddingRight="@dimen/card_content_padding"
+                    app:contentPaddingTop="@dimen/card_content_xPadding"
+                    app:contentPaddingBottom="@dimen/card_content_xPadding"
+                    android:layout_margin="@dimen/content_padding">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:orientation="vertical">
+
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:paddingBottom="@dimen/card_content_padding">
-                            <TextView
-                                android:id="@+id/tv_temp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="28°"
-                                style="@style/WeatherTextStyle"/>
+                            android:gravity="center">
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:gravity="center">
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:src="@drawable/ic_water_drop_24"
-                                    app:tint = "@color/white"
-                                    android:layout_marginRight="5dp"/>
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:paddingBottom="@dimen/card_content_padding">
                                 <TextView
-                                    android:id="@+id/tv_prec"
+                                    android:id="@+id/tv_temp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    style="@style/SmallTextStyle"
-                                    android:text="73%"/>
+                                    android:text="28°"
+                                    style="@style/WeatherTextStyle"/>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center">
+                                    <ImageView
+                                        android:layout_width="15dp"
+                                        android:layout_height="15dp"
+                                        android:src="@drawable/ic_water_drop_24"
+                                        app:tint = "@color/white"
+                                        android:layout_marginRight="5dp"/>
+                                    <TextView
+                                        android:id="@+id/tv_prec"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        style="@style/SmallTextStyle"
+                                        android:text="73%"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:gravity="center">
+                                <ImageView
+                                    android:id="@+id/iv_weather"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:src="@drawable/org_logo"/>
+                                <TextView
+                                    android:id="@+id/tv_weather"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Broken Clouds"
+                                    style="@style/SmallTextStyle"/>
                             </LinearLayout>
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:gravity="center">
-                            <ImageView
-                                android:id="@+id/iv_weather"
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:src="@drawable/org_logo"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                             <TextView
-                                android:id="@+id/tv_weather"
+                                android:id="@+id/tv_wind_speed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Broken Clouds"
+                                android:text="Wind 17km/hr"
+                                style="@style/SmallTextStyle"/>
+                            <TextView
+                                android:id="@+id/tv_feels_like"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/content_padding"
+                                android:text="Feels like 32°C"
                                 style="@style/SmallTextStyle"/>
                         </LinearLayout>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/tv_wind_speed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Wind 17km/hr"
-                            style="@style/SmallTextStyle"/>
-                        <TextView
-                            android:id="@+id/tv_feels_like"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/content_padding"
-                            android:text="Feels like 32°C"
-                            style="@style/SmallTextStyle"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-        <!-- 5 Days weather forecast -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            <!-- 5 Days weather forecast -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/card_content_padding"
-                android:background="@color/app_grey">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/cont_7_title"
-                    style="@style/MediumTextBoldStyle"
-                    android:textColor="@color/black"/>
+                    android:padding="@dimen/card_content_padding"
+                    android:background="@color/app_grey">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cont_7_title"
+                        style="@style/MediumTextBoldStyle"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_weather_forecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/content_padding"/>
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_weather_forecast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/content_padding"/>
         </LinearLayout>
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

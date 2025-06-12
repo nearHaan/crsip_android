@@ -1,10 +1,13 @@
 package com.duk.crsipandroid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -14,10 +17,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,10 +39,10 @@ import java.util.List;
 public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener {
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
-
     private MaterialButton btn_domestic, btn_international;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
-
+    RelativeLayout notificationContainer;
+    private MaterialToolbar toolbar;
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
     private FaqAdapter faqAdapter;
@@ -47,12 +53,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private boolean isDomestic = true;
     private List<PricePageItem> domesticPages, internationalPages;
 
+    private SnapHelper snapHelper;
+    private RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         initViews();
+        setupToolbar();
         setButtons();
         setupRecyclerViews();
         setupPages();
@@ -90,6 +100,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         tv_wind_speed = findViewById(R.id.tv_wind_speed);
         tv_feels_like = findViewById(R.id.tv_feels_like);
         tv_weather = findViewById(R.id.tv_weather);
+        notificationContainer = findViewById(R.id.notification_container);
         btn_domestic = findViewById(R.id.btn_domestic);
         btn_international = findViewById(R.id.btn_international);
         btn_domestic.setOnClickListener(this);
@@ -114,6 +125,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
         }
         setupPages();
+    }
+
+    private void setupToolbar() {
+        toolbar = findViewById(R.id.tb_home);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        notificationContainer.setOnClickListener(this);
     }
 
 
@@ -145,9 +166,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private void setupPages(){
         try {
-            rv_rubber_price_page.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             pricePageAdapter = new PricePageAdapter(getPricePages(isDomestic?"domestic":"international"));
             rv_rubber_price_page.setAdapter(pricePageAdapter);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            rv_rubber_price_page.setLayoutManager(layoutManager);
+
+            if (rv_rubber_price_page.getOnFlingListener() == null) {
+                snapHelper = new LinearSnapHelper();
+                snapHelper.attachToRecyclerView(rv_rubber_price_page);
+            }
+
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -156,6 +184,29 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private String priceJSONlist = "{\n" +
             "  \"domestic\": {\n" +
             "    \"Kottayam\": [\n" +
+            "      {\n" +
+            "        \"title\": \"Title1\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"title\": \"Title2\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"title\": \"Title3\",\n" +
+            "        \"rupees\": \"23.23\",\n" +
+            "        \"rupStat\": \"rise\",\n" +
+            "        \"dollars\": \"23.23\",\n" +
+            "        \"dolStat\": \"fall\"\n" +
+            "      }\n" +
+            "    ],\n" +
+            "    \"Trivandrum\": [\n" +
             "      {\n" +
             "        \"title\": \"Title1\",\n" +
             "        \"rupees\": \"23.23\",\n" +
@@ -342,10 +393,13 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     public void onClick(View v) {
         if(v.getId() == R.id.btn_domestic){
             isDomestic = true;
+            setButtons();
         } else if (v.getId() == R.id.btn_international){
             isDomestic = false;
+            setButtons();
+        } else if (v.getId() == R.id.notification_container) {
+            Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show();
         }
-        setButtons();
     }
 }
 
@@ -441,15 +495,15 @@ class PricePageItem{
 class PricePageRowItem{
     public String title;
     public String rup;
-    public int rupStat;
+    public String rupStat;
     public String dol;
-    public  int dolStat;
+    public  String dolStat;
 
     public PricePageRowItem(String title, String rup, String rupStat, String dol, String dolStat){
         this.title = title;
         this.rup = rup;
-        this.rupStat = rupStat=="rise"?R.drawable.org_logo:(rupStat=="fall"?R.drawable.org_logo:R.drawable.org_logo);
+        this.rupStat = rupStat;
         this.dol = dol;
-        this.dolStat = dolStat=="rise"?R.drawable.org_logo:(dolStat=="fall"?R.drawable.org_logo:R.drawable.org_logo);
+        this.dolStat = dolStat;
     }
 }

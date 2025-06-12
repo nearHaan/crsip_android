@@ -50,7 +50,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LatLng location = new LatLng(lat, lon);
         googleMap.addMarker(new MarkerOptions()
                 .position(location)
-                .title(markerTitle));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 20f));
+                .title(markerTitle)
+                .snippet("Sample text"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
     }
 }

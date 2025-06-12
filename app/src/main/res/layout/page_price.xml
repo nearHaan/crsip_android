@@ -11,6 +11,7 @@
         android:clipToOutline="true"
         android:layout_marginHorizontal="@dimen/content_padding"
         android:layout_marginBottom="@dimen/content_padding"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         android:minHeight="250dp">
 
