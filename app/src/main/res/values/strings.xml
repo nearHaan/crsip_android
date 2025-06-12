@@ -16,4 +16,8 @@
     <string name="nav_opt2">Change Password</string>
     <string name="nav_opt3">Change Language</string>
     <string name="nav_opt4">Log Out</string>
+
+
+    <string name="navigation_drawer_open">OPEN</string>
+    <string name="navigation_drawer_close">CLOSE</string>
 </resources>

@@ -1,47 +1,48 @@
 package com.duk.crsipandroid;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Time;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener {
+public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
     private MaterialButton btn_domestic, btn_international;
-    private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather;
-    RelativeLayout notificationContainer;
+    private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_userNameText;
+    private RelativeLayout notificationContainer;
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private MaterialToolbar toolbar;
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
@@ -63,6 +64,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
         initViews();
         setupToolbar();
+        setupDrawer();
+        setupNavigationHeader();
         setButtons();
         setupRecyclerViews();
         setupPages();
@@ -105,6 +108,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         btn_international = findViewById(R.id.btn_international);
         btn_domestic.setOnClickListener(this);
         btn_international.setOnClickListener(this);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
     }
 
     void setButtons() {
@@ -133,8 +138,25 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         notificationContainer.setOnClickListener(this);
+    }
+
+    private void setupDrawer() {
+        toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        navigationView.setNavigationItemSelectedListener(this);
+        toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.white));
+        toggle.syncState();
+    }
+
+    private void setupNavigationHeader() {
+//        View headerView = navigationView.getHeaderView(0);
+//        tv_userNameText = headerView.findViewById(R.id.tv_prec);
+//        tv_userNameText.setText("Farhaan");
     }
 
 
@@ -400,6 +422,39 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         } else if (v.getId() == R.id.notification_container) {
             Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_opt1){
+            Toast.makeText(this, "My Plantations clicked", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_opt2) {
+            Toast.makeText(this, "Change Password clicked", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_opt3) {
+            Toast.makeText(this, "Change Language clicked", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_opt4) {
+            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    // Method to close drawer programmatically
+    public void closeDrawer() {
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
 
