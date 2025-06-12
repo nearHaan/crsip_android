@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duk.crsipandroid.mvp.PricePageRowItem;
+
 import java.util.List;
 
 public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdapter.ViewHolder> {

@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.duk.crsipandroid.mvp.PricePageItem;
+
 import java.util.List;
 
 public class PricePageAdapter extends RecyclerView.Adapter<PricePageAdapter.ViewHolder> {

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -22,6 +21,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duk.crsipandroid.mvp.AdvisoryItem;
+import com.duk.crsipandroid.mvp.FaqItem;
+import com.duk.crsipandroid.mvp.PricePageItem;
+import com.duk.crsipandroid.mvp.PricePageRowItem;
+import com.duk.crsipandroid.mvp.RecommendationItem;
+import com.duk.crsipandroid.mvp.RubberFacility;
+import com.duk.crsipandroid.mvp.WeatherForeCast;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
@@ -458,109 +464,6 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     public void closeDrawer() {
         drawerLayout.closeDrawer(GravityCompat.START);
     }
+
 }
 
-class RecommendationItem{
-    public int id;
-    public String title;
-    public int icon;
-
-    public int bgColor;
-
-    public RecommendationItem(int id, String title, int icon){
-        this.id = id;
-        this.title = title;
-        this.icon = icon;
-        this.bgColor = R.color.app_green;
-    }
-}
-
-class AdvisoryItem{
-    public int id;
-    public String title;
-    public int icon;
-    public int bgColor;
-
-    public AdvisoryItem(int id, String title, int icon){
-        this.id = id;
-        this.title = title;
-        this.icon = icon;
-        this.bgColor = R.color.app_green;
-    }
-}
-
-class FaqItem{
-    int id;
-    public String title;
-    public int icon;
-
-    public int bgColor;
-
-    public FaqItem(int id, String title, int icon){
-        this.id = id;
-        this.title = title;
-        this.icon = icon;
-        this.bgColor = R.color.app_green;
-    }
-}
-
-class RubberFacility{
-    int id;
-    public String title;
-    public String subTitle;
-    public double lat;
-    public double lon;
-    public RubberFacility(int id, String title, String subTitle, double lat, double lon){
-        this.id = id;
-        this.title = title;
-        this.subTitle = subTitle;
-        this.lat = lat;
-        this.lon = lon;
-    }
-}
-
-class WeatherForeCast {
-    public String date;
-    public String day;
-    public String time;
-    public int weatherRes;
-    public String weather;
-    public String temp;
-    public String precp;
-
-    public WeatherForeCast(String date, String day, String time, int weatherRes, String weather, String temp, String precp){
-        this.date = date;
-        this.day = day;
-        this.time = time;
-        this.weatherRes = weatherRes;
-        this.weather = weather;
-        this.temp = temp;
-        this.precp = precp;
-    }
-}
-
-class PricePageItem{
-    public String title;
-    public List<PricePageRowItem> items;
-
-    public PricePageItem(String title, List<PricePageRowItem> items){
-        this.title = title;
-        this.items = items;
-    }
-}
-
-class PricePageRowItem{
-    public String title;
-    public String rup;
-    public String rupStat;
-    public String dol;
-    public  String dolStat;
-
-    public PricePageRowItem(String title, String rup, String rupStat, String dol, String dolStat){
-        this.title = title;
-        this.rup = rup;
-        this.rupStat = rupStat;
-        this.dol = dol;
-        this.dolStat = dolStat;
-    }
-}
