@@ -241,6 +241,21 @@
                             android:textColor="@color/black"/>
                     </LinearLayout>
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_location_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        app:icon="@drawable/ic_location"
+                        app:iconTint="@color/black"
+                        app:iconPadding="@dimen/card_content_padding"
+                        android:textAlignment="textStart"
+                        app:cornerRadius="5dp"
+                        android:textColor="@color/black"
+                        app:iconGravity="end"
+                        android:layout_marginHorizontal="@dimen/content_padding"
+                        android:layout_marginTop="@dimen/card_content_padding"
+                        style="@style/Widget.Material3.Button.OutlinedButton"/>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_rubber_facility"
                         android:layout_width="match_parent"
@@ -322,6 +337,22 @@
                             style="@style/MediumTextBoldStyle"
                             android:textColor="@color/black"/>
                     </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_location_weather"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        app:icon="@drawable/ic_location"
+                        app:iconTint="@color/black"
+                        app:iconPadding="@dimen/card_content_padding"
+                        android:textAlignment="textStart"
+                        app:cornerRadius="5dp"
+                        android:textColor="@color/black"
+                        app:iconGravity="end"
+                        android:layout_marginHorizontal="@dimen/content_padding"
+                        android:layout_marginTop="@dimen/card_content_padding"
+                        style="@style/Widget.Material3.Button.OutlinedButton"/>
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
