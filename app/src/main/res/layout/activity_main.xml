@@ -79,7 +79,7 @@
                     android:id="@+id/et_layout_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your Phone number"
+                    android:hint="@string/phone_number"
                     app:startIconDrawable="@drawable/ic_phone_android_24"
                     style="@style/LoginEditTextStyle">
 
@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/content_padding"
-                    android:hint="Enter password"
+                    android:hint="@string/password"
                     app:startIconDrawable="@drawable/ic_password_24"
                     app:endIconMode="password_toggle"
                     style="@style/LoginEditTextStyle">
@@ -122,6 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/content_padding"
+                    android:padding="@dimen/card_content_padding"
                     android:text="LOGIN"
                     style="@style/LoginButton"/>
 

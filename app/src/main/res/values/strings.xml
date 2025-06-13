@@ -21,4 +21,13 @@
 
     <string name="navigation_drawer_open">OPEN</string>
     <string name="navigation_drawer_close">CLOSE</string>
+
+    <!--- Register/Login Screen-->
+    <string name="register_title">User Registration</string>
+    <string name="name">Full Name</string>
+    <string name="username">Username</string>
+    <string name="email">Enter your Email ID</string>
+    <string name="phone_number">Enter your Phone Number</string>
+    <string name="password">Enter password</string>
+    <string name="confirm_password">Enter confirm password</string>
 </resources>
