@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +38,6 @@ public class BottomSheetLocation extends BottomSheetDialogFragment implements Bo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bs_location, container, false);
-
         RecyclerView rv_location_bs = view.findViewById(R.id.rv_location_bs);
         rv_location_bs.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
         BottomSheetLocationAdapter bottomSheetLocationAdapter = new BottomSheetLocationAdapter(items);

@@ -3,19 +3,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/content_padding">
+    android:background="@drawable/bg_bottomsheet"
+    android:clipChildren="true">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
         android:text="@string/location_bs_title"
         style="@style/MediumTextBoldStyle"
         android:textColor="@color/black"
+        android:background="@color/app_grey"
+        android:gravity="center"
+        android:clipToOutline="true"
         android:layout_marginBottom="@dimen/content_padding"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_location_bs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/content_padding"/>
 
 </LinearLayout>
