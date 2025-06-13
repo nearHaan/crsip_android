@@ -87,6 +87,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_main"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:background="@color/white"
@@ -475,6 +476,46 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_chatbot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_support_agent"
+            app:tint="@android:color/white"
+            app:backgroundTint="@color/app_yellow"
+            android:contentDescription="Chat Bot" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_testing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:icon="@drawable/ic_soli_testing"
+            app:iconTint="@color/white"
+            android:text="Soil Testing"
+            style="@style/MediumTextStyle"
+            app:tint="@android:color/white"
+            app:backgroundTint="@color/app_green"
+            android:contentDescription="Soil Testing" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_ask_expert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="100dp"
+            app:icon="@drawable/ic_chat"
+            app:iconTint="@color/white"
+            style="@style/MediumTextStyle"
+            android:text="Ask an expert"
+            app:tint="@android:color/white"
+            app:backgroundTint="@color/app_green"
+            android:contentDescription="Ask an Expert" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     
     <com.google.android.material.navigation.NavigationView

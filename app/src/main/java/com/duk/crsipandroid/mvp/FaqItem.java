@@ -13,6 +13,6 @@ public class FaqItem{
         this.id = id;
         this.title = title;
         this.icon = icon;
-        this.bgColor = R.color.app_green;
+        this.bgColor = R.color.blue;
     }
 }

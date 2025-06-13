@@ -24,7 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initViews();
+    }
 
+    void initViews(){
         et_phone_number = findViewById(R.id.et_phone_number);
         et_password = findViewById(R.id.et_password);
         et_layout_phone_number = findViewById(R.id.et_layout_phone_number);
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_register = findViewById(R.id.btn_register);
         btn_login = findViewById(R.id.btn_login);
         login_root_layout = findViewById(R.id.login_root_layout);
-
         btn_login.setOnClickListener(this);
     }
 

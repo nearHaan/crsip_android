@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.SnapHelper;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -38,6 +40,8 @@ import com.duk.crsipandroid.mvp.WeatherForeCast;
 import com.duk.crsipandroid.utils.BottomSheetLocation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -54,6 +58,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
     private MaterialButton btn_domestic, btn_international, btn_location_facility, btn_location_weather;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_username, tv_version_no;
+    private NestedScrollView sv_main;
+    private FloatingActionButton fab_chatbot;
+    private ExtendedFloatingActionButton fab_testing, fab_ask_expert;
     private RelativeLayout notificationContainer;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
@@ -133,6 +140,22 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         btn_location_weather = findViewById(R.id.btn_location_weather);
         btn_location_facility.setOnClickListener(this);
         btn_location_weather.setOnClickListener(this);
+        sv_main = findViewById(R.id.sv_main);
+        fab_chatbot = findViewById(R.id.fab_chatbot);
+        fab_testing = findViewById(R.id.fab_testing);
+        fab_ask_expert = findViewById(R.id.fab_ask_expert);
+        sv_main.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > 200){
+                    fab_ask_expert.setExtended(false);
+                    fab_testing.setExtended(false);
+                } else {
+                    fab_ask_expert.setExtended(true);
+                    fab_testing.setExtended(true);
+                }
+            }
+        });
     }
 
     void setButtons() {
