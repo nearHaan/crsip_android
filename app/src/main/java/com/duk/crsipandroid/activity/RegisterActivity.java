@@ -96,6 +96,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         if (flag){
             return false;
+        } if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,6}$")){
+            et_email.requestFocus();
+            et_layout_email.setError("Enter a valid email address");
+            return false;
+        } else {
+            et_layout_email.setErrorEnabled(false);
+        } if (!phone_number.matches("^[6-9]+[\\d]{9}$")){
+            et_phone_number.requestFocus();
+            et_layout_phone_number.setError("Enter a valid phone number");
+            return false;
+        } else {
+            et_layout_phone_number.setErrorEnabled(false);
+        } if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[#@$._])[A-Za-z\\d#@$._]{8,}$")){
+            et_password.setText("");
+            et_confirm_password.setText("");
+            et_layout_password.setError("The password must be a minimum of 8 characters and contain at least one letter, one digit, and one special character (#, $, @, or _). Only these characters are permitted");
+            return false;
+        } else {
+            et_layout_password.setErrorEnabled(false);
+        }
+        if (password!=confirm_password){
+            et_password.requestFocus();
+            et_password.setText("");
+            et_confirm_password.setText("");
+            et_layout_confirm_password.setError("Confirm Password does not match");
+            return false;
+        } else {
+            et_layout_confirm_password.setErrorEnabled(false);
         }
         return true;
     }
