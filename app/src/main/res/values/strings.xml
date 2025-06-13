@@ -30,4 +30,6 @@
     <string name="phone_number">Enter your Phone Number</string>
     <string name="password">Enter password</string>
     <string name="confirm_password">Enter confirm password</string>
+
+    <string name="cant_be_empty">This field cannot be empty</string>
 </resources>
