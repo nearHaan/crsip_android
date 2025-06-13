@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
@@ -494,10 +495,21 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         } else if (id == R.id.nav_opt3) {
             Toast.makeText(this, "Change Language clicked", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_opt4) {
-            Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+            handleLogout();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    void handleLogout(){
+        SharedPreferences.Editor editor = getSharedPreferences("CRISP", MODE_PRIVATE).edit();
+        editor.remove("phone_number");
+        editor.remove("password");
+        editor.apply();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
