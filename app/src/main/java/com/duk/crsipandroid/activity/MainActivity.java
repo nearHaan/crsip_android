@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_layout_password = findViewById(R.id.et_layout_password);
         btn_forgot_password = findViewById(R.id.btn_forgot_password);
         btn_register = findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(this);
         btn_login = findViewById(R.id.btn_login);
         login_root_layout = findViewById(R.id.login_root_layout);
         btn_login.setOnClickListener(this);
@@ -124,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Snackbar.make(login_root_layout, "Invalid Credentials. Try again", Snackbar.LENGTH_SHORT).show();
                 }
             }
+        } else if (v.getId() == R.id.btn_register) {
+            Intent intent = new Intent(this, RegisterActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -145,6 +145,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         fab_chatbot = findViewById(R.id.fab_chatbot);
         fab_testing = findViewById(R.id.fab_testing);
         fab_ask_expert = findViewById(R.id.fab_ask_expert);
+        fab_chatbot.setOnClickListener(this);
+        fab_testing.setOnClickListener(this);
+        fab_ask_expert.setOnClickListener(this);
         sv_main.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
@@ -482,6 +485,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         } else if (v.getId() == R.id.btn_location_weather) {
             isFacilitySelection = false;
             bottomSheetLocation.show(getSupportFragmentManager(), "Location Bottom Sheet");
+        } else if (v.getId() == R.id.fab_ask_expert) {
+            Intent intent = new Intent(this, AskAnExpertActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -518,15 +524,6 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void openDrawer() {
-        drawerLayout.openDrawer(GravityCompat.START);
-    }
-
-    // Method to close drawer programmatically
-    public void closeDrawer() {
-        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
     @Override
