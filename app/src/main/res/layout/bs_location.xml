@@ -3,8 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_bottomsheet"
-    android:clipChildren="true">
+    android:background="@drawable/bg_bottomsheet">
 
     <TextView
         android:layout_width="match_parent"
@@ -12,10 +11,11 @@
         android:text="@string/location_bs_title"
         style="@style/MediumTextBoldStyle"
         android:textColor="@color/black"
-        android:background="@color/app_grey"
-        android:gravity="center"
-        android:clipToOutline="true"
-        android:layout_marginBottom="@dimen/content_padding"/>
+        android:gravity="center"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_location_bs"
