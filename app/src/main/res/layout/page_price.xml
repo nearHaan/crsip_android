@@ -29,7 +29,6 @@
                     android:id="@+id/tv_price_page_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kottayam"
                     style="@style/MediumTextStyle"/>
             </LinearLayout>
             <LinearLayout
@@ -46,7 +45,7 @@
                     android:textAlignment="center"
                     style="@style/SmallTextStyle"
                     android:textColor="@color/blue"
-                    android:layout_weight="4"/>
+                    android:layout_weight="3"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -58,7 +57,7 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.5"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -70,7 +69,7 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="0.5"/>
 
             </LinearLayout>
             <LinearLayout

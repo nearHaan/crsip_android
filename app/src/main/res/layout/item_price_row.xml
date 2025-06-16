@@ -13,7 +13,7 @@
         android:text="@string/cont_1_title"
         style="@style/SmallTextStyle"
         android:textColor="@color/black"
-        android:layout_weight="4"/>
+        android:layout_weight="3"/>
     <TextView
         android:id="@+id/tv_price_row_rup"
         android:layout_width="0dp"
@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:src="@drawable/ic_home_24"
-        android:layout_weight="1"/>
+        android:layout_weight="0.5"/>
     <TextView
         android:id="@+id/tv_price_row_dol"
         android:layout_width="0dp"
@@ -43,6 +43,6 @@
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:src="@drawable/ic_home_24"
-        android:layout_weight="1"/>
+        android:layout_weight="0.5"/>
 
 </LinearLayout>
