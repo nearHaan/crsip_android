@@ -58,11 +58,11 @@ public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdap
 
         void bind(CategoryPrice item){
             tv_title.setText(item.categoryName);
-            tv_rup.setText(item.rup);
+            tv_rup.setText(String.valueOf(item.rup));
             iv_rupStat.setImageResource(item.rupStat.equals("rise")?R.drawable.ic_arrow_upward_24:(item.rupStat.equals("fall")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
             iv_rupStat.setImageTintList(ColorStateList.valueOf(
                     ContextCompat.getColor(itemView.getContext(), item.rupStat.equals("rise")?R.color.app_green:(item.rupStat.equals("fall")?R.color.red:R.color.app_yellow))));
-            tv_dol.setText(item.dol);
+            tv_dol.setText(String.valueOf(item.dol));
             iv_dolStat.setImageResource(item.dolStat.equals("rise")?R.drawable.ic_arrow_upward_24:(item.dolStat.equals("fall")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
             iv_dolStat.setImageTintList(ColorStateList.valueOf(
                     ContextCompat.getColor(itemView.getContext(), item.dolStat.equals("rise")?R.color.app_green:(item.dolStat.equals("fall")?R.color.red:R.color.app_yellow))));

@@ -12,4 +12,8 @@ public class PriceResponse {
         this.date = date;
         this.categoryPrice = categoryPrice;
     }
+
+    public String getMarketLocation(){ return mareketLocation; }
+    public String getDate(){ return date; }
+    public List<CategoryPrice> getCategoryPrice(){ return categoryPrice; }
 }
