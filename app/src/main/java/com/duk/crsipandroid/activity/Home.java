@@ -347,9 +347,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
                     CategoryPrice rowItem = new CategoryPrice(
                             categoryObj.getString("CategoryName"),
-                            String.valueOf(categoryObj.getDouble("rupeeamt")),
+                            categoryObj.getDouble("rupeeamt"),
                             categoryObj.getString("rupeeindicator"),
-                            String.valueOf(categoryObj.getDouble("dollaramt")),
+                            categoryObj.getDouble("dollaramt"),
                             categoryObj.getString("dollarindiator")
                     );
 
