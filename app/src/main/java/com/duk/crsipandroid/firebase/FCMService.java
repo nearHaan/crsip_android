@@ -31,8 +31,8 @@ public class FCMService extends FirebaseMessagingService {
     }
 
     private void showNotification(String title, String message) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "MyChannel")
-                .setSmallIcon(R.drawable.ic_notifications)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "1")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
@@ -40,7 +40,7 @@ public class FCMService extends FirebaseMessagingService {
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("MyChannel", "My Notifications", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel("1", "CRISP", NotificationManager.IMPORTANCE_HIGH);
             manager.createNotificationChannel(channel);
         }
 
