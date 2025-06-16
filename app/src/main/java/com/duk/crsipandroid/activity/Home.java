@@ -18,7 +18,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -34,7 +33,7 @@ import com.duk.crsipandroid.adapters.RecommendationAdapter;
 import com.duk.crsipandroid.adapters.WeatherAdapter;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
-import com.duk.crsipandroid.mvp.PricePageItem;
+import com.duk.crsipandroid.mvp.PriceResponse;
 import com.duk.crsipandroid.mvp.PricePageRowItem;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
@@ -52,7 +51,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, BottomSheetLocation.onItemClickListener {
@@ -78,7 +76,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private boolean isDomestic = true;
     private boolean isFacilitySelection = true;
-    private List<PricePageItem> domesticPages, internationalPages;
+    private List<PriceResponse> domesticPages, internationalPages;
     private List<String> locationsList;
     private SnapHelper snapHelper;
     private RecyclerView.LayoutManager layoutManager;
@@ -331,14 +329,15 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             "    ]\n" +
             "  }\n" +
             "]";
-    private List<PricePageItem> getPricePages(String domain) throws JSONException{
-        List<PricePageItem> items = new ArrayList<>();
+    private List<PriceResponse> getPricePages(String domain) throws JSONException{
+        List<PriceResponse> items = new ArrayList<>();
         try {
             JSONArray marketArray = new JSONArray(priceJSONlist);
 
             for (int i = 0; i < marketArray.length(); i++) {
                 JSONObject marketObj = marketArray.getJSONObject(i);
                 String location = marketObj.getString("MarketLocation");
+                String date = marketObj.getString("date");
                 JSONArray categoryArray = marketObj.getJSONArray("Categoryprice");
 
                 List<PricePageRowItem> rowItems = new ArrayList<>();
@@ -357,8 +356,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                     rowItems.add(rowItem);
                 }
 
-                PricePageItem pricePageItem = new PricePageItem(location, rowItems);
-                items.add(pricePageItem);
+                PriceResponse priceResponse = new PriceResponse(location, date,rowItems);
+                items.add(priceResponse);
             }
 
             return items;

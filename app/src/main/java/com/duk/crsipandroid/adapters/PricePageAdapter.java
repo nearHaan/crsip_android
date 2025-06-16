@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duk.crsipandroid.R;
-import com.duk.crsipandroid.mvp.PricePageItem;
+import com.duk.crsipandroid.mvp.PriceResponse;
 
 import java.util.List;
 
 public class PricePageAdapter extends RecyclerView.Adapter<PricePageAdapter.ViewHolder> {
 
-    public List<PricePageItem> items;
+    public List<PriceResponse> items;
     private PricePageViewAdapter pricePageViewAdapter;
 
-    public PricePageAdapter(List<PricePageItem> items){
+    public PricePageAdapter(List<PriceResponse> items){
         this.items = items;
     }
 
@@ -32,7 +32,7 @@ public class PricePageAdapter extends RecyclerView.Adapter<PricePageAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PricePageItem item = items.get(position);
+        PriceResponse item = items.get(position);
         holder.bind(item);
     }
 
@@ -52,7 +52,7 @@ public class PricePageAdapter extends RecyclerView.Adapter<PricePageAdapter.View
             rv_rubber_price = itemView.findViewById(R.id.rv_rubber_price);
         }
 
-        void bind(PricePageItem item){
+        void bind(PriceResponse item){
             tv_title.setText(item.location);
             rv_rubber_price.setLayoutManager(new LinearLayoutManager(rv_rubber_price.getContext(), LinearLayoutManager.VERTICAL, false));
             pricePageViewAdapter = new PricePageViewAdapter(item.items);
