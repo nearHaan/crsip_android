@@ -77,27 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean validateTextBox(){
         String ph_text = et_phone_number.getText().toString().trim();
         String pass_text = et_password.getText().toString().trim();
-        if(!ph_text.matches("[0-9]{10}")) {
+        if(!ph_text.matches("^[6-9]+[0-9]{9}$")) {
             //et_layout_phone_number.setError("Invalid phone number. Try again");
             Snackbar.make(login_root_layout, "Please enter a valid phone number", Snackbar.LENGTH_SHORT).show();
             return false;
         }
-        char firstChar = et_phone_number.getText().toString().trim().charAt(0);
-        boolean flag = true;
-        for(int i=0; i<ph_text.length(); i++){
-            if(ph_text.charAt(i) != firstChar){
-                flag = false;
-                break;
-            }
-        }
-        if (flag){
-            //et_layout_phone_number.setError("Invalid phone number. Try again");
-            Snackbar.make(login_root_layout, "Invalid phone number. Try again", Snackbar.LENGTH_SHORT).show();
-            return false;
-        }
-//        else {
-//            et_layout_phone_number.setErrorEnabled(false);
-//        }
         if (pass_text.isEmpty()) {
             //et_layout_password.setError("Please enter a valid password");
             Snackbar.make(login_root_layout, "Please enter a valid password", Snackbar.LENGTH_SHORT).show();

@@ -111,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return false;
         } else {
             et_layout_email.setErrorEnabled(false);
-        } if (!phone_number.matches("^[6-9]+[\\d]{9}$")){
+        } if (!phone_number.matches("^[6-9]+[0-9]{9}$")){
             et_phone_number.requestFocus();
             et_layout_phone_number.setError("Enter a valid phone number");
             return false;
