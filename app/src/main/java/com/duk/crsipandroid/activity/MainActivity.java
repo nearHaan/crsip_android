@@ -1,6 +1,7 @@
 package com.duk.crsipandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.duk.crsipandroid.R;
+import com.duk.crsipandroid.utils.DBHandler;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.button.MaterialButton;
@@ -23,11 +25,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static MaterialButton btn_register, btn_forgot_password, btn_login;
 
     private SharedPreferences sharedPreferences;
+    private DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
+        dbHandler = new DBHandler(this);
+        dbHandler.getAllUsers();
         initViews();
         checkLogin();
     }
@@ -55,9 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     boolean validateCredentials(String phoneNumber, String password){
-        String truePhoneNumber = "0000000011";
-        String truePassword = "1234";
-        if (truePhoneNumber.equals(phoneNumber) && truePassword.equals(password)){
+        if (dbHandler.validateUser(phoneNumber, password)){
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
             finish();

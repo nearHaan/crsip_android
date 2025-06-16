@@ -1,11 +1,14 @@
 package com.duk.crsipandroid.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.duk.crsipandroid.R;
+import com.duk.crsipandroid.utils.DBHandler;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -16,10 +19,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private static TextInputLayout et_layout_name, et_layout_username, et_layout_email, et_layout_phone_number, et_layout_password, et_layout_confirm_password;
     private static MaterialButton btn_cancel, btn_register;
 
+    private DBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_register);
+        dbHandler = new DBHandler(this);
 
         initViews();
     }
@@ -45,22 +52,24 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_register){
-            if (validate()){
-                finish();
-            }
-        } else if (v.getId() == R.id.btn_register_cancel) {
-            //
-        }
-    }
-
-    private boolean validate(){
         String name = et_name.getText().toString().trim();
         String username = et_username.getText().toString().trim();
         String email = et_email.getText().toString().trim();
         String phone_number = et_phone_number.getText().toString().trim();
         String password = et_password.getText().toString().trim();
         String confirm_password = et_confirm_password.getText().toString().trim();
+        if (v.getId() == R.id.btn_register){
+            if (validate(name, username, email, phone_number, password, confirm_password)){
+                dbHandler.addUser(name, username, email, phone_number, password);
+                Toast.makeText(this, "User Added", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        } else if (v.getId() == R.id.btn_register_cancel) {
+            finish();
+        }
+    }
+
+    private boolean validate(String name, String username, String email, String phone_number, String password, String confirm_password){
         String cant_be_empty = "This field cannot be empty";
         boolean flag = false;
         if (name.isEmpty()){
@@ -108,6 +117,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return false;
         } else {
             et_layout_phone_number.setErrorEnabled(false);
+        } if (!dbHandler.ifUsernameUnique(username)){
+            et_layout_username.setError("Username already exists");
+            return false;
+        } else {
+            et_layout_username.setErrorEnabled(false);
+        } if (!dbHandler.ifPhoneUnique(phone_number)){
+            et_layout_phone_number.setError("Phone number already exists");
+            return false;
+        } else {
+            et_layout_phone_number.setErrorEnabled(false);
         } if (!password.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[#@$._])[A-Za-z\\d#@$._]{8,}$")){
             et_password.setText("");
             et_confirm_password.setText("");
@@ -116,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         } else {
             et_layout_password.setErrorEnabled(false);
         }
-        if (password!=confirm_password){
+        if (!password.equals(confirm_password)){
             et_password.requestFocus();
             et_password.setText("");
             et_confirm_password.setText("");

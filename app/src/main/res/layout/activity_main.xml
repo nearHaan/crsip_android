@@ -80,13 +80,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone_number"
+                    android:textColorHint="@color/dark_grey"
                     app:startIconDrawable="@drawable/ic_phone_android_24"
+                    app:startIconTint="@color/dark_grey"
                     style="@style/LoginEditTextStyle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_phone_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:inputType="phone"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,14 +99,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/content_padding"
                     android:hint="@string/password"
+                    android:textColorHint="@color/dark_grey"
                     app:startIconDrawable="@drawable/ic_password_24"
                     app:endIconMode="password_toggle"
+                    app:startIconTint="@color/dark_grey"
+                    app:endIconTint="@color/dark_grey"
                     style="@style/LoginEditTextStyle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/dark_grey"
                         android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,7 +140,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Don't have an account?"/>
+                        android:text="Don't have an account?"
+                        style="@style/SmallTextStyle"
+                        android:textColor="@color/black"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_register"
