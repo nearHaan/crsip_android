@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dbHandler = new DBHandler(this);
         dbHandler.getAllUsers();
         initViews();
+//        handleFirebase();
         checkLogin();
     }
 
@@ -51,6 +53,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_login.setOnClickListener(this);
         sharedPreferences = getSharedPreferences("CRISP", MODE_PRIVATE);
     }
+
+//    void handleFirebase(){
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(task -> {
+//                    if (!task.isSuccessful()) {
+//                        Log.w("FCM", "Fetching FCM token failed", task.getException());
+//                        return;
+//                    }
+//                    String token = task.getResult();
+//                    Log.d("FCM", "Token: " + token);
+//                });
+//    }
 
     void checkLogin(){
         String phoneNumber = sharedPreferences.getString("phone_number", "");

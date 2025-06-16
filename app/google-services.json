@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968233635819",
+    "project_id": "crsip-android",
+    "storage_bucket": "crsip-android.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968233635819:android:5c1959e3e8f0c641b793ae",
+        "android_client_info": {
+          "package_name": "com.duk.crsipandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsfbz0jWMVYGEgAOxsEwAEBPIk0Q9KLDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
