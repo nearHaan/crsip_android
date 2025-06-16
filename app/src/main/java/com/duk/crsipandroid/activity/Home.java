@@ -263,133 +263,110 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         bottomSheetLocation.setItemClickListener(this);
     }
 
-    private String priceJSONlist = "{\n" +
-            "  \"domestic\": {\n" +
-            "    \"Kottayam\": [\n" +
+    private String priceJSONlist = "[\n" +
+            "  {\n" +
+            "    \"MarketLocation\": \"Kottayam\",\n" +
+            "    \"date\": \"2025-06-14\",\n" +
+            "    \"Categoryprice\": [\n" +
             "      {\n" +
-            "        \"title\": \"Title1\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
+            "        \"CategoryId\": 7,\n" +
+            "        \"CategoryName\": \"RSS4\",\n" +
+            "        \"rupeeindicator\": \"increasing\",\n" +
+            "        \"rupeeamt\": 19750,\n" +
+            "        \"dollarindiator\": \"increasing\",\n" +
+            "        \"dollaramt\": 229.39\n" +
             "      },\n" +
             "      {\n" +
-            "        \"title\": \"Title2\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"title\": \"Title3\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      }\n" +
-            "    ],\n" +
-            "    \"Trivandrum\": [\n" +
-            "      {\n" +
-            "        \"title\": \"Title1\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"title\": \"Title2\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"title\": \"Title3\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      }\n" +
-            "    ],\n" +
-            "    \"Kollam\": [\n" +
-            "      {\n" +
-            "        \"title\": \"Title4\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"title\": \"Title5\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
+            "        \"CategoryId\": 9,\n" +
+            "        \"CategoryName\": \"RSS5\",\n" +
+            "        \"rupeeindicator\": \"increasing\",\n" +
+            "        \"rupeeamt\": 19450,\n" +
+            "        \"dollarindiator\": \"increasing\",\n" +
+            "        \"dollaramt\": 225.91\n" +
             "      }\n" +
             "    ]\n" +
             "  },\n" +
-            "  \"international\": {\n" +
-            "    \"India\": [\n" +
+            "  {\n" +
+            "    \"MarketLocation\": \"Kochi\",\n" +
+            "    \"date\": \"2025-06-14\",\n" +
+            "    \"Categoryprice\": [\n" +
             "      {\n" +
-            "        \"title\": \"Title6\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
-            "      }\n" +
-            "    ],\n" +
-            "    \"USA\": [\n" +
-            "      {\n" +
-            "        \"title\": \"Title7\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
+            "        \"CategoryId\": 7,\n" +
+            "        \"CategoryName\": \"RSS4\",\n" +
+            "        \"rupeeindicator\": \"increasing\",\n" +
+            "        \"rupeeamt\": 19750,\n" +
+            "        \"dollarindiator\": \"increasing\",\n" +
+            "        \"dollaramt\": 229.39\n" +
             "      },\n" +
             "      {\n" +
-            "        \"title\": \"Title8\",\n" +
-            "        \"rupees\": \"23.23\",\n" +
-            "        \"rupStat\": \"rise\",\n" +
-            "        \"dollars\": \"23.23\",\n" +
-            "        \"dolStat\": \"fall\"\n" +
+            "        \"CategoryId\": 9,\n" +
+            "        \"CategoryName\": \"RSS5\",\n" +
+            "        \"rupeeindicator\": \"increasing\",\n" +
+            "        \"rupeeamt\": 19450,\n" +
+            "        \"dollarindiator\": \"increasing\",\n" +
+            "        \"dollaramt\": 225.91\n" +
+            "      }\n" +
+            "    ]\n" +
+            "  },\n" +
+            "  {\n" +
+            "    \"MarketLocation\": \"Agartala\",\n" +
+            "    \"date\": \"2025-06-14\",\n" +
+            "    \"Categoryprice\": [\n" +
+            "      {\n" +
+            "        \"CategoryId\": 7,\n" +
+            "        \"CategoryName\": \"RSS4\",\n" +
+            "        \"rupeeindicator\": \"decreasing\",\n" +
+            "        \"rupeeamt\": 0,\n" +
+            "        \"dollarindiator\": \"decreasing\",\n" +
+            "        \"dollaramt\": 0\n" +
+            "      },\n" +
+            "      {\n" +
+            "        \"CategoryId\": 9,\n" +
+            "        \"CategoryName\": \"RSS5\",\n" +
+            "        \"rupeeindicator\": \"decreasing\",\n" +
+            "        \"rupeeamt\": 0,\n" +
+            "        \"dollarindiator\": \"decreasing\",\n" +
+            "        \"dollaramt\": 0\n" +
             "      }\n" +
             "    ]\n" +
             "  }\n" +
-            "}";
+            "]";
     private List<PricePageItem> getPricePages(String domain) throws JSONException{
         List<PricePageItem> items = new ArrayList<>();
         try {
-            JSONObject root = new JSONObject(priceJSONlist);
-            JSONObject domestic = root.getJSONObject(domain);
+            JSONArray marketArray = new JSONArray(priceJSONlist);
 
-            Iterator<String> keys = domestic.keys();
-
-            while (keys.hasNext()) {
-                String location = keys.next(); // e.g., "Kottayam"
-                JSONArray itemsArray = domestic.getJSONArray(location);
+            for (int i = 0; i < marketArray.length(); i++) {
+                JSONObject marketObj = marketArray.getJSONObject(i);
+                String location = marketObj.getString("MarketLocation");
+                JSONArray categoryArray = marketObj.getJSONArray("Categoryprice");
 
                 List<PricePageRowItem> rowItems = new ArrayList<>();
 
-                for (int i = 0; i < itemsArray.length(); i++) {
-                    JSONObject rowObj = itemsArray.getJSONObject(i);
+                for (int j = 0; j < categoryArray.length(); j++) {
+                    JSONObject categoryObj = categoryArray.getJSONObject(j);
+
                     PricePageRowItem rowItem = new PricePageRowItem(
-                            rowObj.getString("title"),
-                            rowObj.getString("rupees"),
-                            rowObj.getString("rupStat"),
-                            rowObj.getString("dollars"),
-                            rowObj.getString("dolStat")
+                            categoryObj.getString("CategoryName"),
+                            String.valueOf(categoryObj.getDouble("rupeeamt")),
+                            categoryObj.getString("rupeeindicator"),
+                            String.valueOf(categoryObj.getDouble("dollaramt")),
+                            categoryObj.getString("dollarindiator")
                     );
+
                     rowItems.add(rowItem);
                 }
 
                 PricePageItem pricePageItem = new PricePageItem(location, rowItems);
                 items.add(pricePageItem);
             }
+
             return items;
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return new ArrayList<>();
     }
 

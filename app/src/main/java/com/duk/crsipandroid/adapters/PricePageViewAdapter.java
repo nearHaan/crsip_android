@@ -57,7 +57,7 @@ public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdap
         }
 
         void bind(PricePageRowItem item){
-            tv_title.setText(item.title);
+            tv_title.setText(item.categoryName);
             tv_rup.setText(item.rup);
             iv_rupStat.setImageResource(item.rupStat.equals("rise")?R.drawable.ic_arrow_upward_24:(item.rupStat.equals("fall")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
             iv_rupStat.setImageTintList(ColorStateList.valueOf(
