@@ -12,15 +12,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duk.crsipandroid.R;
-import com.duk.crsipandroid.mvp.PricePageRowItem;
+import com.duk.crsipandroid.mvp.CategoryPrice;
 
 import java.util.List;
 
 public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdapter.ViewHolder> {
 
-    public List<PricePageRowItem> items;
+    public List<CategoryPrice> items;
 
-    public PricePageViewAdapter(List<PricePageRowItem> items){
+    public PricePageViewAdapter(List<CategoryPrice> items){
         this.items = items;
     }
 
@@ -33,7 +33,7 @@ public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        PricePageRowItem item = items.get(position);
+        CategoryPrice item = items.get(position);
         holder.bind(item);
     }
 
@@ -56,7 +56,7 @@ public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdap
             iv_dolStat = itemView.findViewById(R.id.iv_price_row_dolRes);
         }
 
-        void bind(PricePageRowItem item){
+        void bind(CategoryPrice item){
             tv_title.setText(item.categoryName);
             tv_rup.setText(item.rup);
             iv_rupStat.setImageResource(item.rupStat.equals("rise")?R.drawable.ic_arrow_upward_24:(item.rupStat.equals("fall")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));

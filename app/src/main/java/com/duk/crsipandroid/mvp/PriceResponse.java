@@ -5,9 +5,9 @@ import java.util.List;
 public class PriceResponse {
     public String mareketLocation;
     public String date;
-    public List<PricePageRowItem> categoryPrice;
+    public List<CategoryPrice> categoryPrice;
 
-    public PriceResponse(String mareketLocation, String date, List<PricePageRowItem> categoryPrice){
+    public PriceResponse(String mareketLocation, String date, List<CategoryPrice> categoryPrice){
         this.mareketLocation = mareketLocation;
         this.date = date;
         this.categoryPrice = categoryPrice;

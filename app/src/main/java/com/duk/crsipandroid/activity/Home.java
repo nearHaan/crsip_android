@@ -34,7 +34,7 @@ import com.duk.crsipandroid.adapters.WeatherAdapter;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
 import com.duk.crsipandroid.mvp.PriceResponse;
-import com.duk.crsipandroid.mvp.PricePageRowItem;
+import com.duk.crsipandroid.mvp.CategoryPrice;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
@@ -340,12 +340,12 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                 String date = marketObj.getString("date");
                 JSONArray categoryArray = marketObj.getJSONArray("Categoryprice");
 
-                List<PricePageRowItem> rowItems = new ArrayList<>();
+                List<CategoryPrice> rowItems = new ArrayList<>();
 
                 for (int j = 0; j < categoryArray.length(); j++) {
                     JSONObject categoryObj = categoryArray.getJSONObject(j);
 
-                    PricePageRowItem rowItem = new PricePageRowItem(
+                    CategoryPrice rowItem = new CategoryPrice(
                             categoryObj.getString("CategoryName"),
                             String.valueOf(categoryObj.getDouble("rupeeamt")),
                             categoryObj.getString("rupeeindicator"),
