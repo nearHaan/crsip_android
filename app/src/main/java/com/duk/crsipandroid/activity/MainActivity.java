@@ -1,10 +1,15 @@
 package com.duk.crsipandroid.activity;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dbHandler = new DBHandler(this);
         dbHandler.getAllUsers();
         initViews();
-//        handleFirebase();
+        askNotificationPermission();
         checkLogin();
     }
 
@@ -54,17 +59,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sharedPreferences = getSharedPreferences("CRISP", MODE_PRIVATE);
     }
 
-//    void handleFirebase(){
-//        FirebaseMessaging.getInstance().getToken()
-//                .addOnCompleteListener(task -> {
-//                    if (!task.isSuccessful()) {
-//                        Log.w("FCM", "Fetching FCM token failed", task.getException());
-//                        return;
-//                    }
-//                    String token = task.getResult();
-//                    Log.d("FCM", "Token: " + token);
-//                });
-//    }
+    void handleFirebase(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("FCM", "Fetching FCM token failed", task.getException());
+                        return;
+                    }
+                    String token = task.getResult();
+                    Log.d("FCM", "Token: " + token);
+                });
+    }
+
+    // Declare the launcher at the top of your Activity/Fragment:
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    handleFirebase();
+                }
+            });
+
+    private void askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    == PackageManager.PERMISSION_GRANTED) {
+                handleFirebase();
+            } else {
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+            }
+        } else {
+            handleFirebase();
+        }
+    }
 
     void checkLogin(){
         String phoneNumber = sharedPreferences.getString("phone_number", "");
