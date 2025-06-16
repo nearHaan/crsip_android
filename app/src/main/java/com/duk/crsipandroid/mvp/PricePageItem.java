@@ -3,11 +3,11 @@ package com.duk.crsipandroid.mvp;
 import java.util.List;
 
 public class PricePageItem{
-    public String title;
+    public String location;
     public List<PricePageRowItem> items;
 
-    public PricePageItem(String title, List<PricePageRowItem> items){
-        this.title = title;
+    public PricePageItem(String location, List<PricePageRowItem> items){
+        this.location = location;
         this.items = items;
     }
 }

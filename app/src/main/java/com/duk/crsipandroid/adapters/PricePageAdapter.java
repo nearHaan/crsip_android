@@ -53,7 +53,7 @@ public class PricePageAdapter extends RecyclerView.Adapter<PricePageAdapter.View
         }
 
         void bind(PricePageItem item){
-            tv_title.setText(item.title);
+            tv_title.setText(item.location);
             rv_rubber_price.setLayoutManager(new LinearLayoutManager(rv_rubber_price.getContext(), LinearLayoutManager.VERTICAL, false));
             pricePageViewAdapter = new PricePageViewAdapter(item.items);
             rv_rubber_price.setAdapter(pricePageViewAdapter);
