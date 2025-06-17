@@ -273,14 +273,14 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                         snapHelper.attachToRecyclerView(rv_rubber_price_page);
                     }
                 } else {
-                    ll_rubber_price.setVisibility(View.INVISIBLE);
+                    ll_rubber_price.setVisibility(View.GONE);
                     Log.e("API_RESULT", "Empty or Error: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(retrofit2.Call<List<PriceResponse>> call, Throwable t) {
-                ll_rubber_price.setVisibility(View.INVISIBLE);
+                ll_rubber_price.setVisibility(View.GONE);
                 Log.e("API", "Failed: " + t.getMessage());
             }
         });
