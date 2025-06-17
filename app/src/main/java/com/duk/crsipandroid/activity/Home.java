@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duk.crsipandroid.BuildConfig;
 import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.adapters.AdvisoryAdapter;
 import com.duk.crsipandroid.adapters.FacilityAdapter;
@@ -34,13 +35,16 @@ import com.duk.crsipandroid.adapters.PricePageAdapter;
 import com.duk.crsipandroid.adapters.RecommendationAdapter;
 import com.duk.crsipandroid.adapters.WeatherAdapter;
 import com.duk.crsipandroid.api.PriceApiService;
+import com.duk.crsipandroid.api.WeatherApiService;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
 import com.duk.crsipandroid.mvp.PriceResponse;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
+import com.duk.crsipandroid.mvp.WeatherResponse;
 import com.duk.crsipandroid.network.RetrofitClientPrices;
+import com.duk.crsipandroid.network.RetrofitClientWeather;
 import com.duk.crsipandroid.utils.BottomSheetLocation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -52,6 +56,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -279,6 +284,24 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             public void onFailure(retrofit2.Call<List<PriceResponse>> call, Throwable t) {
                 ll_rubber_price.setVisibility(View.GONE);
                 Log.e("API_RESULT", "Failed: " + t.getMessage());
+            }
+        });
+    }
+
+    private void fetchWeather(String lat, String lon){
+        String API_KEY = BuildConfig.WEATHER_API_KEY;
+        WeatherApiService weatherApiService = RetrofitClientWeather.getApiServie();
+        retrofit2.Call<WeatherResponse> call = weatherApiService.getWeatherResponse(lat, lon, API_KEY);
+
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+
             }
         });
     }
