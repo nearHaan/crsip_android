@@ -18,7 +18,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,21 +37,16 @@ import com.duk.crsipandroid.api.ApiService;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
 import com.duk.crsipandroid.mvp.PriceResponse;
-import com.duk.crsipandroid.mvp.CategoryPrice;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
-import com.duk.crsipandroid.network.RetrofitClient;
+import com.duk.crsipandroid.network.RetrofitClientPrices;
 import com.duk.crsipandroid.utils.BottomSheetLocation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -257,7 +251,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     }
 
     private void fetchPrices(String type) {
-        ApiService apiService = RetrofitClient.getApiService();
+        ApiService apiService = RetrofitClientPrices.getApiService();
         retrofit2.Call<List<PriceResponse>> call = apiService.getPrices("price", type);
 
         call.enqueue(new Callback<List<PriceResponse>>() {

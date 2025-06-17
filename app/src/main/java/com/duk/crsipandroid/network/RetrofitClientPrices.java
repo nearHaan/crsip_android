@@ -4,7 +4,7 @@ import com.duk.crsipandroid.api.ApiService;
 
 import retrofit2.Retrofit;
 
-public class RetrofitClient {
+public class RetrofitClientPrices {
     private static final String BASE_URL = "https://rubberboard.gov.in/";
     private static Retrofit retrofit;
 
