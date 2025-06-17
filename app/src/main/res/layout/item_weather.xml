@@ -43,8 +43,8 @@
                 style="@style/MediumTextStyle"/>
             <ImageView
                 android:id="@+id/iv_weatherRes_w"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:padding="@dimen/content_padding"
                 android:src="@drawable/org_logo"/>
             <TextView

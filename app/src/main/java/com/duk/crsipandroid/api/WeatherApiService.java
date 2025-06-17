@@ -11,6 +11,7 @@ public interface WeatherApiService {
     Call<WeatherResponse> getWeatherResponse(
         @Query("lat") String lat,
         @Query("lon") String lon,
-        @Query("appid") String appId
+        @Query("appid") String appId,
+        @Query("units") String units
     );
 }

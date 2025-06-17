@@ -104,6 +104,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setupBS();
         setupRecyclerViews();
         fetchPrices(isDomestic?"indian":"international");
+        fetchWeather("8.615891", "76.852488");
     }
 
     @Override
@@ -242,10 +243,6 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         facilityAdapter = new FacilityAdapter(getFacility());
         facilityAdapter.setItemClickListener(this);
         rv_rubber_facility.setAdapter(facilityAdapter);
-
-        rv_weather_forecast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        weatherAdapter = new WeatherAdapter(getForeCastItems());
-        rv_weather_forecast.setAdapter(weatherAdapter);
     }
 
     private void setupBS(){
@@ -291,17 +288,25 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private void fetchWeather(String lat, String lon){
         String API_KEY = BuildConfig.WEATHER_API_KEY;
         WeatherApiService weatherApiService = RetrofitClientWeather.getApiServie();
-        retrofit2.Call<WeatherResponse> call = weatherApiService.getWeatherResponse(lat, lon, API_KEY);
+        retrofit2.Call<WeatherResponse> call = weatherApiService.getWeatherResponse(lat, lon, API_KEY, "metric");
 
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-
+                if (response.isSuccessful() && response.body() != null){
+                    weatherAdapter = new WeatherAdapter(response.body().getList());
+                    rv_weather_forecast.setAdapter(weatherAdapter);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
+                    rv_weather_forecast.setLayoutManager(layoutManager);
+                    rv_weather_forecast.setVisibility(View.VISIBLE);
+                } else {
+                    Log.e("API_RESULT", "Empty or Error: " + response.code());
+                }
             }
 
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
-
+                Log.e("API_RESULT", "Failed: " + t.getMessage());
             }
         });
     }
