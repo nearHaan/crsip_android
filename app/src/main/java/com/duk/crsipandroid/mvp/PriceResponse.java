@@ -3,17 +3,17 @@ package com.duk.crsipandroid.mvp;
 import java.util.List;
 
 public class PriceResponse {
-    public String mareketLocation;
+    public String MarketLocation;
     public String date;
-    public List<CategoryPrice> categoryPrice;
+    public List<CategoryPrice> Categoryprice;
 
-    public PriceResponse(String mareketLocation, String date, List<CategoryPrice> categoryPrice){
-        this.mareketLocation = mareketLocation;
+    public PriceResponse(String MarketLocation, String date, List<CategoryPrice> Categoryprice){
+        this.MarketLocation = MarketLocation;
         this.date = date;
-        this.categoryPrice = categoryPrice;
+        this.Categoryprice = Categoryprice;
     }
 
-    public String getMarketLocation(){ return mareketLocation; }
+    public String getMarketLocation(){ return MarketLocation; }
     public String getDate(){ return date; }
-    public List<CategoryPrice> getCategoryPrice(){ return categoryPrice; }
+    public List<CategoryPrice> getCategoryPrice(){ return Categoryprice; }
 }

@@ -18,8 +18,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.telecom.Call;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,7 @@ import com.duk.crsipandroid.adapters.FaqAdapter;
 import com.duk.crsipandroid.adapters.PricePageAdapter;
 import com.duk.crsipandroid.adapters.RecommendationAdapter;
 import com.duk.crsipandroid.adapters.WeatherAdapter;
+import com.duk.crsipandroid.api.ApiService;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
 import com.duk.crsipandroid.mvp.PriceResponse;
@@ -38,6 +42,7 @@ import com.duk.crsipandroid.mvp.CategoryPrice;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
+import com.duk.crsipandroid.network.RetrofitClient;
 import com.duk.crsipandroid.utils.BottomSheetLocation;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -53,6 +58,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Home extends AppCompatActivity implements RecommendationAdapter.OnItemClickListener, AdvisoryAdapter.onItemClickListener, FaqAdapter.onItemClickListener, FacilityAdapter.onItemClickListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, BottomSheetLocation.onItemClickListener {
 
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
@@ -66,6 +74,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
+    private LinearLayout ll_rubber_price;
     private BottomSheetLocation bottomSheetLocation;
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
@@ -87,6 +96,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_home);
 
+        fetchPrices("indian");
         initViews();
         setupToolbar();
         setupDrawer();
@@ -94,7 +104,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setButtons();
         setupBS();
         setupRecyclerViews();
-        setupPages();
+        fetchPrices(isDomestic?"indian":"international");
     }
 
     @Override
@@ -141,6 +151,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         btn_location_weather = findViewById(R.id.btn_location_weather);
         btn_location_facility.setOnClickListener(this);
         btn_location_weather.setOnClickListener(this);
+        ll_rubber_price = findViewById(R.id.ll_rubber_price);
         sv_main = findViewById(R.id.sv_main);
         fab_chatbot = findViewById(R.id.fab_chatbot);
         fab_testing = findViewById(R.id.fab_testing);
@@ -179,7 +190,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             btn_international.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         }
-        setupPages();
+        fetchPrices(isDomestic?"indian":"international");
     }
 
     private void setupToolbar() {
@@ -237,23 +248,6 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         rv_weather_forecast.setAdapter(weatherAdapter);
     }
 
-    private void setupPages(){
-        try {
-            pricePageAdapter = new PricePageAdapter(getPricePages(isDomestic?"domestic":"international"));
-            rv_rubber_price_page.setAdapter(pricePageAdapter);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-            rv_rubber_price_page.setLayoutManager(layoutManager);
-
-            if (rv_rubber_price_page.getOnFlingListener() == null) {
-                snapHelper = new LinearSnapHelper();
-                snapHelper.attachToRecyclerView(rv_rubber_price_page);
-            }
-
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void setupBS(){
         locationsList = new ArrayList<>();
         locationsList = Arrays.asList(new String[]{"Kollam", "Trivandrum", "Ernakulam", "Alappuzha", "Idukki", "Palakkad"});
@@ -261,112 +255,35 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         bottomSheetLocation.setItemClickListener(this);
     }
 
-    private String priceJSONlist = "[\n" +
-            "  {\n" +
-            "    \"MarketLocation\": \"Kottayam\",\n" +
-            "    \"date\": \"2025-06-14\",\n" +
-            "    \"Categoryprice\": [\n" +
-            "      {\n" +
-            "        \"CategoryId\": 7,\n" +
-            "        \"CategoryName\": \"RSS4\",\n" +
-            "        \"rupeeindicator\": \"increasing\",\n" +
-            "        \"rupeeamt\": 19750,\n" +
-            "        \"dollarindiator\": \"increasing\",\n" +
-            "        \"dollaramt\": 229.39\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"CategoryId\": 9,\n" +
-            "        \"CategoryName\": \"RSS5\",\n" +
-            "        \"rupeeindicator\": \"increasing\",\n" +
-            "        \"rupeeamt\": 19450,\n" +
-            "        \"dollarindiator\": \"increasing\",\n" +
-            "        \"dollaramt\": 225.91\n" +
-            "      }\n" +
-            "    ]\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"MarketLocation\": \"Kochi\",\n" +
-            "    \"date\": \"2025-06-14\",\n" +
-            "    \"Categoryprice\": [\n" +
-            "      {\n" +
-            "        \"CategoryId\": 7,\n" +
-            "        \"CategoryName\": \"RSS4\",\n" +
-            "        \"rupeeindicator\": \"increasing\",\n" +
-            "        \"rupeeamt\": 19750,\n" +
-            "        \"dollarindiator\": \"increasing\",\n" +
-            "        \"dollaramt\": 229.39\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"CategoryId\": 9,\n" +
-            "        \"CategoryName\": \"RSS5\",\n" +
-            "        \"rupeeindicator\": \"increasing\",\n" +
-            "        \"rupeeamt\": 19450,\n" +
-            "        \"dollarindiator\": \"increasing\",\n" +
-            "        \"dollaramt\": 225.91\n" +
-            "      }\n" +
-            "    ]\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"MarketLocation\": \"Agartala\",\n" +
-            "    \"date\": \"2025-06-14\",\n" +
-            "    \"Categoryprice\": [\n" +
-            "      {\n" +
-            "        \"CategoryId\": 7,\n" +
-            "        \"CategoryName\": \"RSS4\",\n" +
-            "        \"rupeeindicator\": \"decreasing\",\n" +
-            "        \"rupeeamt\": 0,\n" +
-            "        \"dollarindiator\": \"decreasing\",\n" +
-            "        \"dollaramt\": 0\n" +
-            "      },\n" +
-            "      {\n" +
-            "        \"CategoryId\": 9,\n" +
-            "        \"CategoryName\": \"RSS5\",\n" +
-            "        \"rupeeindicator\": \"decreasing\",\n" +
-            "        \"rupeeamt\": 0,\n" +
-            "        \"dollarindiator\": \"decreasing\",\n" +
-            "        \"dollaramt\": 0\n" +
-            "      }\n" +
-            "    ]\n" +
-            "  }\n" +
-            "]";
-    private List<PriceResponse> getPricePages(String domain) throws JSONException{
-        List<PriceResponse> items = new ArrayList<>();
-        try {
-            JSONArray marketArray = new JSONArray(priceJSONlist);
+    private void fetchPrices(String type) {
+        ApiService apiService = RetrofitClient.getApiService();
+        retrofit2.Call<List<PriceResponse>> call = apiService.getPrices("price", type);
 
-            for (int i = 0; i < marketArray.length(); i++) {
-                JSONObject marketObj = marketArray.getJSONObject(i);
-                String location = marketObj.getString("MarketLocation");
-                String date = marketObj.getString("date");
-                JSONArray categoryArray = marketObj.getJSONArray("Categoryprice");
+        call.enqueue(new Callback<List<PriceResponse>>() {
+            @Override
+            public void onResponse(retrofit2.Call<List<PriceResponse>> call, Response<List<PriceResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    pricePageAdapter = new PricePageAdapter(response.body());
+                    rv_rubber_price_page.setAdapter(pricePageAdapter);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
+                    rv_rubber_price_page.setLayoutManager(layoutManager);
 
-                List<CategoryPrice> rowItems = new ArrayList<>();
-
-                for (int j = 0; j < categoryArray.length(); j++) {
-                    JSONObject categoryObj = categoryArray.getJSONObject(j);
-
-                    CategoryPrice rowItem = new CategoryPrice(
-                            categoryObj.getString("CategoryName"),
-                            categoryObj.getDouble("rupeeamt"),
-                            categoryObj.getString("rupeeindicator"),
-                            categoryObj.getDouble("dollaramt"),
-                            categoryObj.getString("dollarindiator")
-                    );
-
-                    rowItems.add(rowItem);
+                    if (rv_rubber_price_page.getOnFlingListener() == null) {
+                        snapHelper = new LinearSnapHelper();
+                        snapHelper.attachToRecyclerView(rv_rubber_price_page);
+                    }
+                } else {
+                    ll_rubber_price.setVisibility(View.INVISIBLE);
+                    Log.e("API_RESULT", "Empty or Error: " + response.code());
                 }
-
-                PriceResponse priceResponse = new PriceResponse(location, date,rowItems);
-                items.add(priceResponse);
             }
 
-            return items;
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<>();
+            @Override
+            public void onFailure(retrofit2.Call<List<PriceResponse>> call, Throwable t) {
+                ll_rubber_price.setVisibility(View.INVISIBLE);
+                Log.e("API", "Failed: " + t.getMessage());
+            }
+        });
     }
 
     private List<RecommendationItem> getRecommedationItems(){

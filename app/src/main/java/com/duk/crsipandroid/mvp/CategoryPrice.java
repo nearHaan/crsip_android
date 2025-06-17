@@ -1,23 +1,23 @@
 package com.duk.crsipandroid.mvp;
 
 public class CategoryPrice {
-    public String categoryName;
-    public double rup;
-    public String rupStat;
-    public double dol;
-    public  String dolStat;
+    public String CategoryName;
+    public double rupeeamt;
+    public String rupeeindicator;
+    public double dollaramt;
+    public  String dollarindiator;
 
-    public CategoryPrice(String categoryName, double rup, String rupStat, double dol, String dolStat){
-        this.categoryName = categoryName;
-        this.rup = rup;
-        this.rupStat = rupStat;
-        this.dol = dol;
-        this.dolStat = dolStat;
+    public CategoryPrice(String CategoryName, double rupeeamt, String rupeeindicator, double dollaramt, String dollarindiator){
+        this.CategoryName = CategoryName;
+        this.rupeeamt = rupeeamt;
+        this.rupeeindicator = rupeeindicator;
+        this.dollaramt = dollaramt;
+        this.dollarindiator = dollarindiator;
     }
 
-    public String getCategoryName(){ return categoryName; }
-    public double getRupees(){ return rup; }
-    public String getRupStat(){ return  rupStat; }
-    public double getDollars(){ return  dol; }
-    public String getDolStat(){ return  dolStat; }
+    public String getCategoryName(){ return CategoryName; }
+    public double getRupees(){ return rupeeamt; }
+    public String getRupStat(){ return  rupeeindicator; }
+    public double getDollars(){ return  dollaramt; }
+    public String getDolStat(){ return  dollarindiator; }
 }

@@ -57,15 +57,15 @@ public class PricePageViewAdapter extends RecyclerView.Adapter<PricePageViewAdap
         }
 
         void bind(CategoryPrice item){
-            tv_title.setText(item.categoryName);
-            tv_rup.setText(String.valueOf(item.rup));
-            iv_rupStat.setImageResource(item.rupStat.equals("rise")?R.drawable.ic_arrow_upward_24:(item.rupStat.equals("fall")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
+            tv_title.setText(item.CategoryName);
+            tv_rup.setText(String.valueOf(item.rupeeamt));
+            iv_rupStat.setImageResource(item.rupeeindicator.equals("increasing")?R.drawable.ic_arrow_upward_24:(item.rupeeindicator.equals("decreasing")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
             iv_rupStat.setImageTintList(ColorStateList.valueOf(
-                    ContextCompat.getColor(itemView.getContext(), item.rupStat.equals("rise")?R.color.app_green:(item.rupStat.equals("fall")?R.color.red:R.color.app_yellow))));
-            tv_dol.setText(String.valueOf(item.dol));
-            iv_dolStat.setImageResource(item.dolStat.equals("rise")?R.drawable.ic_arrow_upward_24:(item.dolStat.equals("fall")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
+                    ContextCompat.getColor(itemView.getContext(), item.rupeeindicator.equals("increasing")?R.color.app_green:(item.rupeeindicator.equals("decreasing")?R.color.red:R.color.app_yellow))));
+            tv_dol.setText(String.valueOf(item.dollaramt));
+            iv_dolStat.setImageResource(item.dollarindiator.equals("increasing")?R.drawable.ic_arrow_upward_24:(item.dollarindiator.equals("decreasing")?R.drawable.ic_arrow_downward_24:R.drawable.ic_equal_24));
             iv_dolStat.setImageTintList(ColorStateList.valueOf(
-                    ContextCompat.getColor(itemView.getContext(), item.dolStat.equals("rise")?R.color.app_green:(item.dolStat.equals("fall")?R.color.red:R.color.app_yellow))));
+                    ContextCompat.getColor(itemView.getContext(), item.dollarindiator.equals("increasing")?R.color.app_green:(item.dollarindiator.equals("decreasing")?R.color.red:R.color.app_yellow))));
         }
     }
 }
