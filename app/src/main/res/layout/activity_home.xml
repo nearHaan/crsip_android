@@ -314,6 +314,17 @@
                             style="@style/Widget.Material3.Button.OutlinedButton"/>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/ll_price_loading"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:gravity="center">
+                        <ProgressBar
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"/>
+                    </LinearLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_rubber_price_page"
                         android:layout_width="match_parent"

@@ -74,7 +74,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
-    private LinearLayout ll_rubber_price;
+    private LinearLayout ll_rubber_price, ll_price_loading;
     private BottomSheetLocation bottomSheetLocation;
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
@@ -152,6 +152,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         btn_location_facility.setOnClickListener(this);
         btn_location_weather.setOnClickListener(this);
         ll_rubber_price = findViewById(R.id.ll_rubber_price);
+        ll_price_loading = findViewById(R.id.ll_price_loading);
         sv_main = findViewById(R.id.sv_main);
         fab_chatbot = findViewById(R.id.fab_chatbot);
         fab_testing = findViewById(R.id.fab_testing);
@@ -267,6 +268,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                     rv_rubber_price_page.setAdapter(pricePageAdapter);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
                     rv_rubber_price_page.setLayoutManager(layoutManager);
+                    ll_price_loading.setVisibility(View.GONE);
+                    rv_rubber_price_page.setVisibility(View.VISIBLE);
                     ll_rubber_price.setVisibility(View.VISIBLE);
                     if (rv_rubber_price_page.getOnFlingListener() == null) {
                         snapHelper = new LinearSnapHelper();
@@ -366,11 +369,15 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_domestic){
+        if(v.getId() == R.id.btn_domestic && !isDomestic){
             isDomestic = true;
+            ll_price_loading.setVisibility(View.VISIBLE);
+            rv_rubber_price_page.setVisibility(View.GONE);
             setButtons();
-        } else if (v.getId() == R.id.btn_international){
+        } else if (v.getId() == R.id.btn_international && isDomestic){
             isDomestic = false;
+            ll_price_loading.setVisibility(View.VISIBLE);
+            rv_rubber_price_page.setVisibility(View.GONE);
             setButtons();
         } else if (v.getId() == R.id.notification_container) {
             Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show();
