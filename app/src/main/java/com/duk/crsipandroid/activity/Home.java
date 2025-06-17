@@ -33,7 +33,7 @@ import com.duk.crsipandroid.adapters.FaqAdapter;
 import com.duk.crsipandroid.adapters.PricePageAdapter;
 import com.duk.crsipandroid.adapters.RecommendationAdapter;
 import com.duk.crsipandroid.adapters.WeatherAdapter;
-import com.duk.crsipandroid.api.ApiService;
+import com.duk.crsipandroid.api.PriceApiService;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
 import com.duk.crsipandroid.mvp.PriceResponse;
@@ -251,8 +251,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     }
 
     private void fetchPrices(String type) {
-        ApiService apiService = RetrofitClientPrices.getApiService();
-        retrofit2.Call<List<PriceResponse>> call = apiService.getPrices("price", type);
+        PriceApiService priceApiService = RetrofitClientPrices.getApiService();
+        retrofit2.Call<List<PriceResponse>> call = priceApiService.getPrices("price", type);
 
         call.enqueue(new Callback<List<PriceResponse>>() {
             @Override
@@ -278,7 +278,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             @Override
             public void onFailure(retrofit2.Call<List<PriceResponse>> call, Throwable t) {
                 ll_rubber_price.setVisibility(View.GONE);
-                Log.e("API", "Failed: " + t.getMessage());
+                Log.e("API_RESULT", "Failed: " + t.getMessage());
             }
         });
     }

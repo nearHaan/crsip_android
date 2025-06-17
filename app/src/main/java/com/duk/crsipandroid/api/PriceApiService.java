@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 
 import java.util.List;
 
-public interface ApiService {
+public interface PriceApiService {
     @GET("rubservice")
     Call<List<PriceResponse>> getPrices(
             @Query("task") String task,
