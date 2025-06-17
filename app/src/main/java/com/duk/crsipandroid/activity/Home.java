@@ -267,7 +267,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                     rv_rubber_price_page.setAdapter(pricePageAdapter);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
                     rv_rubber_price_page.setLayoutManager(layoutManager);
-
+                    ll_rubber_price.setVisibility(View.VISIBLE);
                     if (rv_rubber_price_page.getOnFlingListener() == null) {
                         snapHelper = new LinearSnapHelper();
                         snapHelper.attachToRecyclerView(rv_rubber_price_page);
