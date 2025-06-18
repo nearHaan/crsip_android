@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
 import com.duk.crsipandroid.BuildConfig;
 import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.adapters.AdvisoryAdapter;
@@ -41,6 +40,7 @@ import com.duk.crsipandroid.api.PriceApiService;
 import com.duk.crsipandroid.api.WeatherApiService;
 import com.duk.crsipandroid.mvp.AdvisoryItem;
 import com.duk.crsipandroid.mvp.FaqItem;
+import com.duk.crsipandroid.mvp.LocationLatLong;
 import com.duk.crsipandroid.mvp.PriceResponse;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
@@ -91,7 +91,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private boolean isDomestic = true;
     private boolean isFacilitySelection = true;
     private List<PriceResponse> domesticPages, internationalPages;
-    private List<String> locationsList;
+    private List<LocationLatLong> locationsList;
     private SnapHelper snapHelper;
     private RecyclerView.LayoutManager layoutManager;
     private final String ICON_BASE_URL = "https://openweathermap.org/img/wn/";
@@ -257,7 +257,16 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
 
     private void setupBS(){
         locationsList = new ArrayList<>();
-        locationsList = Arrays.asList(new String[]{"Kollam", "Trivandrum", "Ernakulam", "Alappuzha", "Idukki", "Palakkad"});
+        locationsList.add(new LocationLatLong("Thiruvananthapuram", 8.5000, 76.9167));
+        locationsList.add(new LocationLatLong("Kochi", 9.9667, 76.2833));
+        locationsList.add(new LocationLatLong("Kozhikode", 11.2500, 75.7800));
+        locationsList.add(new LocationLatLong("Kollam", 8.8833, 76.6000));
+        locationsList.add(new LocationLatLong("Thrissur", 10.5167, 76.2167));
+        locationsList.add(new LocationLatLong("Alappuzha", 9.4833, 76.3333));
+        locationsList.add(new LocationLatLong("Kottayam", 9.6000, 76.5667));
+        locationsList.add(new LocationLatLong("Palakkad", 10.7667, 76.6500));
+        locationsList.add(new LocationLatLong("Kannur", 11.8667, 75.3667));
+        locationsList.add(new LocationLatLong("Kasaragod", 12.5000, 75.0000));
         bottomSheetLocation = new BottomSheetLocation(locationsList);
         bottomSheetLocation.setItemClickListener(this);
     }
@@ -276,7 +285,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         String icon_url = ICON_BASE_URL+weatherItem.getWeather().get(0).getIcon()+ICON_URL_SUFFIX;
         Glide.with(this)
                 .load(icon_url)
-                .placeholder(R.drawable.ic_weather_error)
+                .placeholder(R.drawable.ic_weather_loading)
                 .error(R.drawable.ic_weather_error)
                 .into(iv_weather);
         tv_weather.setText(weatherItem.getWeather().get(0).getMain().toUpperCase());
@@ -488,13 +497,14 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     }
 
     @Override
-    public void onSheetItemClick(String title, int position) {
+    public void onSheetItemClick(LocationLatLong item, int position) {
         if (isFacilitySelection){
-            Toast.makeText(this, title+" facility",Toast.LENGTH_SHORT).show();
-            btn_location_facility.setText(title);
+            Toast.makeText(this, item.getLocation()+" facility",Toast.LENGTH_SHORT).show();
+            btn_location_facility.setText(item.getLocation());
         } else {
-            Toast.makeText(this, title+" weather",Toast.LENGTH_SHORT).show();
-            btn_location_weather.setText(title);
+            Toast.makeText(this, item.getLocation()+" weather",Toast.LENGTH_SHORT).show();
+            btn_location_weather.setText(item.getLocation());
+            fetchWeather(String.valueOf(item.getLatitude()), String.valueOf(item.getLongitude()));
         }
         bottomSheetLocation.dismiss();
     }

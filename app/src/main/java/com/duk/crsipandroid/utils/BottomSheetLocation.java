@@ -1,5 +1,6 @@
 package com.duk.crsipandroid.utils;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +15,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.adapters.BottomSheetLocationAdapter;
+import com.duk.crsipandroid.mvp.LocationLatLong;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.List;
 
 public class BottomSheetLocation extends BottomSheetDialogFragment implements BottomSheetLocationAdapter.onItemClickListener {
 
-    List<String> items;
+    List<LocationLatLong> items;
     onItemClickListener listener;
 
     public interface onItemClickListener{
-        void onSheetItemClick(String title, int position);
+        void onSheetItemClick(LocationLatLong item, int position);
     }
 
     public void setItemClickListener(onItemClickListener listener){
         this.listener = listener;
     }
 
-    public BottomSheetLocation(List<String> items){
+    public BottomSheetLocation(List<LocationLatLong> items){
         this.items = items;
     }
     @Nullable
@@ -47,7 +49,7 @@ public class BottomSheetLocation extends BottomSheetDialogFragment implements Bo
     }
 
     @Override
-    public void onSheetItemClick(String title, int position) {
-        listener.onSheetItemClick(title, position);
+    public void onSheetItemClick(LocationLatLong item, int position) {
+        listener.onSheetItemClick(item, position);
     }
 }

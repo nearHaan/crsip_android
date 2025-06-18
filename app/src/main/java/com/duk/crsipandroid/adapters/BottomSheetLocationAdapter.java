@@ -10,19 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duk.crsipandroid.R;
+import com.duk.crsipandroid.mvp.LocationLatLong;
 
 import java.util.List;
 
 public class BottomSheetLocationAdapter extends RecyclerView.Adapter<BottomSheetLocationAdapter.ViewHolder> {
 
-    List<String> items;
+    List<LocationLatLong> items;
     onItemClickListener listener;
 
     public interface onItemClickListener{
-        void onSheetItemClick(String title, int position);
+        void onSheetItemClick(LocationLatLong item, int position);
     }
 
-    public BottomSheetLocationAdapter(List<String> items){
+    public BottomSheetLocationAdapter(List<LocationLatLong> items){
         this.items = items;
     }
 
@@ -39,8 +40,8 @@ public class BottomSheetLocationAdapter extends RecyclerView.Adapter<BottomSheet
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String title = items.get(position);
-        holder.bind(title, position);
+        LocationLatLong item = items.get(position);
+        holder.bind(item, position);
     }
 
     @Override
@@ -55,11 +56,11 @@ public class BottomSheetLocationAdapter extends RecyclerView.Adapter<BottomSheet
             super(itemView);
             tv_title = itemView.findViewById(R.id.tv_bs_location_item);
             ll_item = itemView.findViewById(R.id.ll_bs_location);
-        }  void bind(String title, int position){
-            tv_title.setText(title);
+        }  void bind(LocationLatLong item, int position){
+            tv_title.setText(item.getLocation());
             ll_item.setOnClickListener(v -> {
                 if (listener != null){
-                    listener.onSheetItemClick(title, position);
+                    listener.onSheetItemClick(item, position);
                 }
             });
         }

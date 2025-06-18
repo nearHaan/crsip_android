@@ -1,11 +1,12 @@
 package com.duk.crsipandroid.network;
 
+import com.duk.crsipandroid.BuildConfig;
 import com.duk.crsipandroid.api.PriceApiService;
 
 import retrofit2.Retrofit;
 
 public class RetrofitClientPrices {
-    private static final String BASE_URL = "https://rubberboard.gov.in/";
+    private static final String BASE_URL = BuildConfig.RUBBER_BASE_URL;
     private static Retrofit retrofit;
 
     public static PriceApiService getApiService() {

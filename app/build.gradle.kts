@@ -28,6 +28,7 @@ android {
 
         buildConfigField("String", "MAPS_API_KEY", "\"${secretsProperties["MAPS_API_KEY"]}\"")
         buildConfigField("String", "WEATHER_API_KEY", "\"${secretsProperties["WEATHER_API_KEY"]}\"")
+        buildConfigField("String", "RUBBER_BASE_URL", "\"${secretsProperties["RUBBER_BASE_URL"]}\"")
     }
 
     buildTypes {
