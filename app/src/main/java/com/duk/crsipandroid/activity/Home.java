@@ -21,11 +21,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.duk.crsipandroid.BuildConfig;
 import com.duk.crsipandroid.R;
 import com.duk.crsipandroid.adapters.AdvisoryAdapter;
@@ -67,6 +70,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private RecyclerView rv_recommendations, rv_advisory, rv_faqs, rv_rubber_facility, rv_rubber_price_page, rv_weather_forecast;
     private MaterialButton btn_domestic, btn_international, btn_location_facility, btn_location_weather;
     private TextView tv_temp, tv_prec, tv_wind_speed, tv_feels_like, tv_weather, tv_username, tv_version_no;
+    private ImageView iv_weather;
     private NestedScrollView sv_main;
     private FloatingActionButton fab_chatbot;
     private ExtendedFloatingActionButton fab_testing, fab_ask_expert;
@@ -80,7 +84,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
     private FaqAdapter faqAdapter;
-    private  FacilityAdapter facilityAdapter;
+    private FacilityAdapter facilityAdapter;
     private WeatherAdapter weatherAdapter;
     private PricePageAdapter pricePageAdapter;
 
@@ -90,6 +94,8 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private List<String> locationsList;
     private SnapHelper snapHelper;
     private RecyclerView.LayoutManager layoutManager;
+    private final String ICON_BASE_URL = "https://openweathermap.org/img/wn/";
+    private final String ICON_URL_SUFFIX = "@2x.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +147,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         tv_wind_speed = findViewById(R.id.tv_wind_speed);
         tv_feels_like = findViewById(R.id.tv_feels_like);
         tv_weather = findViewById(R.id.tv_weather);
+        iv_weather = findViewById(R.id.iv_weather);
         notificationContainer = findViewById(R.id.notification_container);
         btn_domestic = findViewById(R.id.btn_domestic);
         btn_international = findViewById(R.id.btn_international);
@@ -254,9 +261,24 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         bottomSheetLocation.setItemClickListener(this);
     }
 
+    private String convertSpeed(double speed){
+        double speedKMperH = 3.6*speed;
+        String newSpeed = new DecimalFormat("#.#").format(speedKMperH);
+        return "Wind: "+newSpeed+" km/hr";
+    }
+
     private void setCurrentWether(WeatherItem weatherItem){
         tv_temp.setText(new DecimalFormat("#").format(weatherItem.getMain().getTemp())+"°C");
         tv_prec.setText(new DecimalFormat("#").format(weatherItem.getMain().getHumidity())+"%");
+        tv_wind_speed.setText(convertSpeed(weatherItem.getWind().getSpeed()));
+        tv_feels_like.setText("Feels like "+new DecimalFormat("#").format(weatherItem.getMain().getFeelsLike())+"°C");
+        String icon_url = ICON_BASE_URL+weatherItem.getWeather().get(0).getIcon()+ICON_URL_SUFFIX;
+        Glide.with(this)
+                .load(icon_url)
+                .placeholder(R.drawable.ic_weather_error)
+                .error(R.drawable.ic_weather_error)
+                .into(iv_weather);
+        tv_weather.setText(weatherItem.getWeather().get(0).getMain().toUpperCase());
     }
 
     private void fetchPrices(String type) {
