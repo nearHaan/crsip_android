@@ -435,8 +435,8 @@
                                         android:gravity="center">
                                         <ImageView
                                             android:id="@+id/iv_weather"
-                                            android:layout_width="50dp"
-                                            android:layout_height="50dp"
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
                                             android:src="@drawable/ic_weather_error"/>
                                         <TextView
                                             android:id="@+id/tv_weather"
