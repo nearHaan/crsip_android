@@ -1,12 +1,7 @@
 package com.duk.crsipandroid.network;
 
 import com.duk.crsipandroid.BuildConfig;
-import com.duk.crsipandroid.adapters.WeatherDeserializer;
 import com.duk.crsipandroid.api.PriceApiService;
-import com.duk.crsipandroid.api.WeatherApiService;
-import com.duk.crsipandroid.mvp.WeatherResponse;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
