@@ -111,7 +111,10 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setupBS();
         setupRecyclerViews();
         fetchPrices(isDomestic?"indian":"international");
-        fetchWeather(String.valueOf(locationsList.get(0).getLatitude()), String.valueOf(locationsList.get(0).getLongitude()));
+        if (locationsList.size() > 0){
+            fetchWeather(String.valueOf(locationsList.get(0).getLatitude()), String.valueOf(locationsList.get(0).getLongitude()));
+            btn_location_weather.setText(locationsList.get(0).getLocation());
+        }
     }
 
     @Override
