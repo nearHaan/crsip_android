@@ -42,6 +42,7 @@ import com.duk.crsipandroid.mvp.PriceResponse;
 import com.duk.crsipandroid.mvp.RecommendationItem;
 import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
+import com.duk.crsipandroid.mvp.WeatherItem;
 import com.duk.crsipandroid.mvp.WeatherResponse;
 import com.duk.crsipandroid.network.RetrofitClientPrices;
 import com.duk.crsipandroid.network.RetrofitClientWeather;
@@ -52,6 +53,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -252,6 +254,11 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         bottomSheetLocation.setItemClickListener(this);
     }
 
+    private void setCurrentWether(WeatherItem weatherItem){
+        tv_temp.setText(new DecimalFormat("#").format(weatherItem.getMain().getTemp())+"°C");
+        tv_prec.setText(new DecimalFormat("#").format(weatherItem.getMain().getHumidity())+"%");
+    }
+
     private void fetchPrices(String type) {
         PriceApiService priceApiService = RetrofitClientPrices.getApiService();
         retrofit2.Call<List<PriceResponse>> call = priceApiService.getPrices("price", type);
@@ -294,6 +301,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 if (response.isSuccessful() && response.body() != null){
+                    setCurrentWether(response.body().getList().get(0));
                     weatherAdapter = new WeatherAdapter(response.body().getList());
                     rv_weather_forecast.setAdapter(weatherAdapter);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
