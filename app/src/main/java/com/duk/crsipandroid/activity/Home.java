@@ -285,7 +285,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         String icon_url = ICON_BASE_URL+weatherItem.getWeather().get(0).getIcon()+ICON_URL_SUFFIX;
         Glide.with(this)
                 .load(icon_url)
-                .placeholder(R.drawable.ic_weather_error)
+                .placeholder(R.drawable.ic_weather_loading)
                 .error(R.drawable.ic_weather_error)
                 .into(iv_weather);
         tv_weather.setText(weatherItem.getWeather().get(0).getMain().toUpperCase());

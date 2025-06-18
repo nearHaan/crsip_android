@@ -113,7 +113,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             String iconURL = ICON_BASE_URL+item.getWeather().get(0).getIcon()+ICON_URL_SUFFIX;
             Glide.with(itemView.getContext())
                     .load(iconURL)
-                    .placeholder(R.drawable.ic_weather_error)
+                    .placeholder(R.drawable.ic_weather_loading)
                     .error(R.drawable.ic_weather_error)
                     .into(iv_weatherRes);
 
