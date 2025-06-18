@@ -47,7 +47,7 @@ import com.duk.crsipandroid.mvp.RubberFacility;
 import com.duk.crsipandroid.mvp.WeatherForeCast;
 import com.duk.crsipandroid.mvp.WeatherItem;
 import com.duk.crsipandroid.mvp.WeatherResponse;
-import com.duk.crsipandroid.network.RetrofitClientPrices;
+import com.duk.crsipandroid.network.RetrofitClientPrice;
 import com.duk.crsipandroid.network.RetrofitClientWeather;
 import com.duk.crsipandroid.utils.BottomSheetLocation;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -285,14 +285,14 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         String icon_url = ICON_BASE_URL+weatherItem.getWeather().get(0).getIcon()+ICON_URL_SUFFIX;
         Glide.with(this)
                 .load(icon_url)
-                .placeholder(R.drawable.ic_weather_loading)
+                .placeholder(R.drawable.ic_weather_error)
                 .error(R.drawable.ic_weather_error)
                 .into(iv_weather);
         tv_weather.setText(weatherItem.getWeather().get(0).getMain().toUpperCase());
     }
 
     private void fetchPrices(String type) {
-        PriceApiService priceApiService = RetrofitClientPrices.getApiService();
+        PriceApiService priceApiService = RetrofitClientPrice.getApiServie();
         retrofit2.Call<List<PriceResponse>> call = priceApiService.getPrices("price", type);
 
         call.enqueue(new Callback<List<PriceResponse>>() {
