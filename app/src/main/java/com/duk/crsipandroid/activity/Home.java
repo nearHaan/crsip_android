@@ -103,7 +103,6 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_home);
 
-        fetchPrices("indian");
         initViews();
         setupToolbar();
         setupDrawer();
@@ -112,7 +111,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         setupBS();
         setupRecyclerViews();
         fetchPrices(isDomestic?"indian":"international");
-        fetchWeather("8.615891", "76.852488");
+        fetchWeather(String.valueOf(locationsList.get(0).getLatitude()), String.valueOf(locationsList.get(0).getLongitude()));
     }
 
     @Override
