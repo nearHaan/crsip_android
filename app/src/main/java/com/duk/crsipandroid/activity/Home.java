@@ -304,7 +304,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                 } else {
                     ll_rubber_price.setVisibility(View.GONE);
                     Log.e("API_RESULT", "Empty or Error: " + response.code());
-                    Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home.this, "Error occurred. Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -312,7 +312,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             public void onFailure(retrofit2.Call<List<PriceResponse>> call, Throwable t) {
                 ll_rubber_price.setVisibility(View.GONE);
                 Log.e("API_RESULT", "Failed: " + t.getMessage());
-                Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "Error occurred. Check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -335,7 +335,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                 } else {
                     Log.e("API_RESULT", "Empty or Error: " + response.code());
                     ll_weather_box.setVisibility(View.GONE);
-                    Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Home.this, "Error occurred. Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -343,7 +343,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
                 Log.e("API_RESULT", "Failed: " + t.getMessage());
                 ll_weather_box.setVisibility(View.GONE);
-                Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "Error occurred. Check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
