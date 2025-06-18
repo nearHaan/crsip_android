@@ -333,161 +333,168 @@
 
                 </LinearLayout>
 
-                <!-- Current Weather -->
+                <!-- Weather Layout -->
                 <LinearLayout
+                    android:id="@+id/ll_weather_box"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
+                    <!-- Current Weather -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/card_content_padding"
-                        android:background="@color/app_grey">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/cont_6_title"
-                            style="@style/MediumTextBoldStyle"
-                            android:textColor="@color/black"/>
-                    </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_location_weather"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Current Location"
-                        app:icon="@drawable/ic_location"
-                        app:iconTint="@color/black"
-                        app:iconPadding="@dimen/card_content_padding"
-                        android:textAlignment="textStart"
-                        app:cornerRadius="5dp"
-                        android:textColor="@color/black"
-                        app:iconGravity="end"
-                        android:layout_marginHorizontal="@dimen/content_padding"
-                        android:layout_marginTop="@dimen/card_content_padding"
-                        style="@style/Widget.Material3.Button.OutlinedButton"/>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="30dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/blue"
-                        app:contentPaddingLeft="@dimen/card_content_padding"
-                        app:contentPaddingRight="@dimen/card_content_padding"
-                        app:contentPaddingTop="@dimen/card_content_xPadding"
-                        app:contentPaddingBottom="@dimen/card_content_xPadding"
-                        android:layout_margin="@dimen/content_padding">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:padding="@dimen/card_content_padding"
+                            android:background="@color/app_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cont_6_title"
+                                style="@style/MediumTextBoldStyle"
+                                android:textColor="@color/black"/>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_location_weather"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Current Location"
+                            app:icon="@drawable/ic_location"
+                            app:iconTint="@color/black"
+                            app:iconPadding="@dimen/card_content_padding"
+                            android:textAlignment="textStart"
+                            app:cornerRadius="5dp"
+                            android:textColor="@color/black"
+                            app:iconGravity="end"
+                            android:layout_marginHorizontal="@dimen/content_padding"
+                            android:layout_marginTop="@dimen/card_content_padding"
+                            style="@style/Widget.Material3.Button.OutlinedButton"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="30dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/blue"
+                            app:contentPaddingLeft="@dimen/card_content_padding"
+                            app:contentPaddingRight="@dimen/card_content_padding"
+                            app:contentPaddingTop="@dimen/card_content_xPadding"
+                            app:contentPaddingBottom="@dimen/card_content_xPadding"
+                            android:layout_margin="@dimen/content_padding">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center">
+                                android:orientation="vertical">
+
                                 <LinearLayout
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:paddingBottom="@dimen/card_content_padding">
-                                    <TextView
-                                        android:id="@+id/tv_temp"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="28°"
-                                        style="@style/WeatherTextStyle"/>
+                                    android:gravity="center">
                                     <LinearLayout
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:gravity="center">
-                                        <ImageView
-                                            android:layout_width="15dp"
-                                            android:layout_height="15dp"
-                                            android:src="@drawable/ic_water_drop_24"
-                                            app:tint = "@color/white"
-                                            android:layout_marginRight="5dp"/>
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:orientation="vertical"
+                                        android:paddingBottom="@dimen/card_content_padding">
                                         <TextView
-                                            android:id="@+id/tv_prec"
+                                            android:id="@+id/tv_temp"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            style="@style/SmallTextStyle"
-                                            android:text="73%"/>
+                                            android:text="28°"
+                                            style="@style/WeatherTextStyle"/>
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center">
+                                            <ImageView
+                                                android:layout_width="15dp"
+                                                android:layout_height="15dp"
+                                                android:src="@drawable/ic_water_drop_24"
+                                                app:tint = "@color/white"
+                                                android:layout_marginRight="5dp"/>
+                                            <TextView
+                                                android:id="@+id/tv_prec"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                style="@style/SmallTextStyle"
+                                                android:text="73%"/>
+                                        </LinearLayout>
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+                                        <ImageView
+                                            android:id="@+id/iv_weather"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:src="@drawable/ic_weather_error"/>
+                                        <TextView
+                                            android:id="@+id/tv_weather"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            style="@style/SmallTextStyle"/>
                                     </LinearLayout>
                                 </LinearLayout>
                                 <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical"
-                                    android:gravity="center">
-                                    <ImageView
-                                        android:id="@+id/iv_weather"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
-                                        android:src="@drawable/ic_weather_error"/>
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
                                     <TextView
-                                        android:id="@+id/tv_weather"
+                                        android:id="@+id/tv_wind_speed"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:text="Wind 17km/hr"
+                                        style="@style/SmallTextStyle"/>
+                                    <TextView
+                                        android:id="@+id/tv_feels_like"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/content_padding"
+                                        android:text="Feels like 32°C"
                                         style="@style/SmallTextStyle"/>
                                 </LinearLayout>
                             </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <TextView
-                                    android:id="@+id/tv_wind_speed"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Wind 17km/hr"
-                                    style="@style/SmallTextStyle"/>
-                                <TextView
-                                    android:id="@+id/tv_feels_like"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="@dimen/content_padding"
-                                    android:text="Feels like 32°C"
-                                    style="@style/SmallTextStyle"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
-                <!-- 5 Days weather forecast -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                    <!-- 5 Days weather forecast -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/card_content_padding"
-                        android:background="@color/app_grey">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/cont_7_title"
-                            style="@style/MediumTextBoldStyle"
-                            android:textColor="@color/black"/>
+                            android:padding="@dimen/card_content_padding"
+                            android:background="@color/app_grey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/cont_7_title"
+                                style="@style/MediumTextBoldStyle"
+                                android:textColor="@color/black"/>
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_weather_forecast"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/content_padding"/>
                     </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_weather_forecast"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/content_padding"/>
                 </LinearLayout>
-
-            </LinearLayout>
+                </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

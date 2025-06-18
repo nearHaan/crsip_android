@@ -79,7 +79,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private MaterialToolbar toolbar;
-    private LinearLayout ll_rubber_price, ll_price_loading;
+    private LinearLayout ll_rubber_price, ll_price_loading, ll_weather_box;
     private BottomSheetLocation bottomSheetLocation;
     private RecommendationAdapter recommendationAdapter;
     private AdvisoryAdapter advisoryAdapter;
@@ -162,6 +162,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         btn_location_weather.setOnClickListener(this);
         ll_rubber_price = findViewById(R.id.ll_rubber_price);
         ll_price_loading = findViewById(R.id.ll_price_loading);
+        ll_weather_box = findViewById(R.id.ll_weather_box);
         sv_main = findViewById(R.id.sv_main);
         fab_chatbot = findViewById(R.id.fab_chatbot);
         fab_testing = findViewById(R.id.fab_testing);
@@ -303,6 +304,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                 } else {
                     ll_rubber_price.setVisibility(View.GONE);
                     Log.e("API_RESULT", "Empty or Error: " + response.code());
+                    Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -310,6 +312,7 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
             public void onFailure(retrofit2.Call<List<PriceResponse>> call, Throwable t) {
                 ll_rubber_price.setVisibility(View.GONE);
                 Log.e("API_RESULT", "Failed: " + t.getMessage());
+                Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -328,15 +331,19 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
                     rv_weather_forecast.setAdapter(weatherAdapter);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(Home.this, LinearLayoutManager.HORIZONTAL, false);
                     rv_weather_forecast.setLayoutManager(layoutManager);
-                    rv_weather_forecast.setVisibility(View.VISIBLE);
+                    ll_weather_box.setVisibility(View.VISIBLE);
                 } else {
                     Log.e("API_RESULT", "Empty or Error: " + response.code());
+                    ll_weather_box.setVisibility(View.GONE);
+                    Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
                 Log.e("API_RESULT", "Failed: " + t.getMessage());
+                ll_weather_box.setVisibility(View.GONE);
+                Toast.makeText(Home.this, "Error occured. Check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
