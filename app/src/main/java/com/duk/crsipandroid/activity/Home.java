@@ -460,6 +460,9 @@ public class Home extends AppCompatActivity implements RecommendationAdapter.OnI
         } else if (v.getId() == R.id.fab_ask_expert) {
             Intent intent = new Intent(this, AskAnExpertActivity.class);
             startActivity(intent);
+        } else if (v.getId() == R.id.fab_testing) {
+            Intent intent = new Intent(this, CameraActivity.class);
+            startActivity(intent);
         }
     }
 
