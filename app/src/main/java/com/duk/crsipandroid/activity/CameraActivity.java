@@ -94,32 +94,12 @@ public class CameraActivity extends AppCompatActivity implements TextureView.Sur
             cameraId = manager.getCameraIdList()[0]; // use back camera
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
             StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            previewSize = chooseOptimalSize(
-                    map.getOutputSizes(SurfaceTexture.class),
-                    textureView.getWidth(),
-                    textureView.getHeight()
-            );
+            previewSize = map.getOutputSizes(SurfaceTexture.class)[0];
 
             manager.openCamera(cameraId, stateCallback, backgroundHandler);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-    }
-
-    private Size chooseOptimalSize(Size[] choices, int textureViewWidth, int textureViewHeight) {
-        float aspectRatio = (float) textureViewHeight / textureViewWidth; // portrait
-        Size optimalSize = choices[0];
-        float minDiff = Float.MAX_VALUE;
-
-        for (Size option : choices) {
-            float optionRatio = (float) option.getHeight() / option.getWidth();
-            float diff = Math.abs(optionRatio - aspectRatio);
-            if (diff < minDiff) {
-                minDiff = diff;
-                optimalSize = option;
-            }
-        }
-        return optimalSize;
     }
 
     private void startPreview() {
