@@ -22,6 +22,10 @@
     <string name="navigation_drawer_open">OPEN</string>
     <string name="navigation_drawer_close">CLOSE</string>
 
+    <!-- Ask an expert bottom menu -->
+    <string name="expert_nav_opt1">Text</string>
+    <string name="expert_nav_opt2">Image</string>
+
     <!--- Register/Login Screen-->
     <string name="register_title">User Registration</string>
     <string name="name">Full Name</string>
